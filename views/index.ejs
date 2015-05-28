@@ -1,15 +1,28 @@
 <!DOCTYPE html>
-<html>
+<html data-ng-app="resume">
   <head>
     <title><%= title %></title>
-    <link rel='stylesheet' href='/stylesheets/style.css' />
+    <link rel='stylesheet' href='/login/css/style.css' />
   </head>
-  <body>
+  <body ng-controller="AppCtrl">
     <h1><%= title %></h1>
-    <p>Welcome to <%= title %></p>
+    <p>{{greeting}}</p>
+    <p>From Express Server:</p>
+    <ul>
+      <% users.forEach(function(el, index){ %>
+        <li><%= el.first_name %></li>
+      <% }); %>
+    </ul>
+    <p>From Angular after making server call:</p>
+    <ul> 
+      <div data-ng-repeat="user in users">
+      <li>{{user.first_name}}</li>
+      </div>
+    </ul>
     <script src="/jquery/dist/jquery.min.js"></script>
     <script src="/angular/angular.min.js"></script>
     <script src="/angular-route/angular-route.min.js"></script>
     <script src="/angular-resource/angular-resource.min.js"></script>
+    <script src="app.js"></script>
   </body>
 </html>
