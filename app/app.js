@@ -6,7 +6,8 @@ angular.module('resume', ['ngResource', 'ngRoute'])
 		'$injector',
 		function ($scope, $injector){
 			var $rootScope = $injector.get('$rootScope'),
-				$http = $injector.get('$http');
+				$http = $injector.get('$http'),
+				UserService = $injector.get('UserService')
 
 			var self = this;	
 
