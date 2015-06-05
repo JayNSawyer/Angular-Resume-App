@@ -22,14 +22,14 @@ angular.module('resume', ['ngResource', 'ngRoute', 'ui.router'])
 	'$urlRouterProvider',
 	function($stateProvider, $urlRouterProvider){
 		$stateProvider
-			// .state('login', {
-			// 	url: '/login',
-			// 	templateUrl: '/login/views/login.html',
-			// 	controller: 'LoginCtrl'
-			// });
+			.state('login', {
+				url: '/login',
+				templateUrl: '/login/views/index.html',
+				controller: 'LoginCtrl'
+			})
 			.state('main', {
 				url: '/main',
-				templateUrl: '/main/views/main.html',
+				templateUrl: '/main/views/index.html',
 				controller: 'MainCtrl'
 			});
 
