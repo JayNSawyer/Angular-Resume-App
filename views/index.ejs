@@ -15,6 +15,18 @@
     <link href="/starterbootstrap/css/modern-business.css" rel="stylesheet">
     <link href="/starterbootstrap/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
 
+    <!-- Eternity Login , Registration & Forgot Password Forms CSS -->
+    <link href="/eternityforms/css/forms.css" rel="stylesheet" />
+
+    <!-- Animations CSS -->
+    <link href="/eternityforms/css/animate.min.css" rel="stylesheet" />
+
+    <!-- Font Icons -->
+    <link href="/eternityforms/css/font-awesome.min.css" rel="stylesheet" />
+
+    <!-- Google Web Fonts -->
+    <link href='http://fonts.googleapis.com/css?family=Roboto:400,300' rel='stylesheet' type='text/css'>
+
     <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
     <!--[if lt IE 9]>
@@ -109,13 +121,26 @@
     </footer>
 
 
-    <!-- vendor JS files -->
+    <!-- ###vendor JS files### -->
     <script src="/jquery/dist/jquery.min.js"></script>
     <script src="/bootstrap/dist/js/bootstrap.min.js"></script>
     <script src="/angular/angular.min.js"></script>
     <script src="/angular-route/angular-route.min.js"></script>
     <script src="/angular-resource/angular-resource.min.js"></script>
     <script src="/angular-ui-router/release/angular-ui-router.min.js"></script>
+
+    <!-- Eternity Forms Vendor-->
+    <!-- PlaceHolder For Older Browsers -->
+    <script src="/eternityforms/js/placeholders.min.js"></script>
+
+    <!-- Custom Checkbox PLugin -->
+    <script src="/eternityforms/js/jquery.icheck.js"></script>
+
+    <!-- Media Query Support For Older Browsers [Ie 8 & lower] -->
+    <script src="/eternityforms/js/respond.min.js"></script>
+    <!-- end Eternity Forms Vendor -->
+
+    <!-- end ###vendor JS files### -->
 
     <!-- app files -->
     <script src="app.js"></script>
@@ -135,6 +160,36 @@
     $('.carousel').carousel({
         interval: 5000 //changes the speed
     })
+
+
+    </script>
+
+      <!-- For Initializing Checkbox And Focus Event For Textbox -->
+    <script type="text/javascript">
+        $(function () {
+
+            //Custom Checkbox For Light Theme
+            $("input").iCheck({
+                checkboxClass: 'icheckbox_square-blue',
+                increaseArea: '20%'
+            });
+
+
+            //Custom Checkbox For Dark Theme
+            $(".dark input").iCheck({
+                checkboxClass: 'icheckbox_polaris',
+                increaseArea: '20%'
+            });
+
+
+            //TextBox Focus Event
+            $(".form-control").focus(function () {
+                $(this).closest(".textbox-wrap").addClass("focused");
+            }).blur(function () {
+                $(this).closest(".textbox-wrap").removeClass("focused");
+            });
+
+        });
     </script>
   </body>
 </html>
