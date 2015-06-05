@@ -1,6 +1,6 @@
 'use strict';
 
-angular.module('resume', ['ngResource', 'ngRoute'])
+angular.module('resume', ['ngResource', 'ngRoute', 'ui.router'])
 	.controller('AppCtrl', [
 		'$scope',
 		'$injector',
@@ -17,4 +17,22 @@ angular.module('resume', ['ngResource', 'ngRoute'])
 				$scope.users = data;
 			});
 		}
+	]).config([
+	'$stateProvider',
+	'$urlRouterProvider',
+	function($stateProvider, $urlRouterProvider){
+		$stateProvider
+			// .state('login', {
+			// 	url: '/login',
+			// 	templateUrl: '/login/views/login.html',
+			// 	controller: 'LoginCtrl'
+			// });
+			.state('main', {
+				url: '/main',
+				templateUrl: '/main/views/main.html',
+				controller: 'MainCtrl'
+			});
+
+		$urlRouterProvider.otherwise('main');	
+	}
 	]);
