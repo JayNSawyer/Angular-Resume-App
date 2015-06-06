@@ -18,12 +18,12 @@ angular.module('resume')
 				error: false
 			};
 
-			validationMessages = [
+			var validationMessages = [
 				{
-					'Incorrect Username': 'Your Username is incorrect',
-					'Incorrect Password': 'Your Password is incorrect',
-					'Correct Credentials': 'Your Credentials are correct',
-					'Error': 'There was an unexpected error'
+					'Incorrect Username': 'Your Username is incorrect!',
+					'Incorrect Password': 'Your Password is incorrect!',
+					'Correct Credentials': 'Your have been signed in!',
+					'Error': 'Sorry, we are unable to sign you in. Try again.'
 				}
 			];
 

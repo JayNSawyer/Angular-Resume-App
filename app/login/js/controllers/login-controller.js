@@ -10,11 +10,20 @@ angular.module('resume').controller('LoginCtrl', [
 
 		vm.username = '';
 		vm.password = '';
-		vm.user = currentUser.profile;
+		vm.validationObject;
+		vm.rememberMe = true;
+		//vm.user = currentUser.profile;
 
-		vm.login = function(form){
-			if (form.$valid){
-				Auth.verifyCredentials()
+		vm.login = function(username, password){
+			vm.loginObject = Auth.verifyCredentials(username, password);
+			if(vm.loginObject.boolean){ //if true, then credentials checked
+				 //log the user in
+				console.log(vm.loginObject.message);
+
+				//call the UserService, which will set the vm.username and make a call to /api/users/:user to grab the user's profile
+		
+			} else if (vm.loginObject.error) {
+				console.log(vm.loginObject.message);
 			}
 		}
 	}

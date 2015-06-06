@@ -6,7 +6,7 @@ angular.module('resume')
 		function ($injector){
 			var $rootScope = $injector.get('$rootScope'),
 				$q = $injector.get('$q'),
-				$http = $injector.get('$http');
+				$http = $injector.get('$http'),
 				ValidationService = $injector.get('ValidationService');
 
 			var self = this;	

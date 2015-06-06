@@ -1,25 +1,12 @@
 var express = require('express');
+var mongoose = require('mongoose');
+var DB = require('../db/database');
 var router = express.Router();
+
+var User = DB.User;
 
 /* GET home page. */
 
-var users = [
-	{
-		id: 0,
-		first_name: 'Jimmy',
-		last_name: 'Jones'
-	},
-	{
-		id: 1,
-		first_name: 'Tommy',
-		last_name: 'Thompson'
-	},
-	{
-		id: 2,
-		first_name: 'Sammy',
-		last_name: 'Smith'
-	}
-];
 
 /* Template */
 router.get('/', function(req, res, next) {
@@ -30,7 +17,14 @@ router.get('/', function(req, res, next) {
 /* JSON API */
 
 router.get('/api/users', function(req, res, next){
-  res.json(users);
+	User.find(function(err, users){
+		if(err){
+			console.log(err);
+		} else {
+			res.json(users);
+		}
+	});
+ 	//res.json(users);
 });
 
 
