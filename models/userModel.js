@@ -12,9 +12,21 @@ var userModel = new Schema({
 	username: {
 		type: String
 	},
-	password: {
+	passwordHash: {
+		type: String
+	},
+	salt: {
 		type: String
 	}
 });
+
+userModel.methods.toJSON = function(){
+	var obj = this.toObject();
+	delete obj.passwordHash;
+	delete obj.salt;
+	delete obj.__v;
+	return obj;
+};
+
 
 module.exports = userModel;

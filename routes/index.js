@@ -10,7 +10,13 @@ var User = DB.User;
 
 /* Template */
 router.get('/', function(req, res, next) {
-  res.render('index', { title: 'Express', users: users });
+	User.find(function(err, users){
+		if(err){
+			console.log(err);
+		} else {
+			res.render('index', {title: 'Express', users: users });
+		}
+	});
 });
 
 

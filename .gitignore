@@ -8,3 +8,5 @@ node_modules/**/*.target
 node_modules/**/.deps/
 node_modules/**/build/Makefile
 node_modules/**/**/build/Makefile
+npm-debug.log
+helpers/hash.js
