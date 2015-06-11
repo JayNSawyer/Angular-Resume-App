@@ -10,3 +10,4 @@ node_modules/**/build/Makefile
 node_modules/**/**/build/Makefile
 npm-debug.log
 helpers/hash.js
+config/secrets.json
