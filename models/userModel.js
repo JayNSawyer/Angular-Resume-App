@@ -1,5 +1,6 @@
 var mongoose = require('mongoose');
-var Hasher = require('../helpers/hash');
+var Hasher = require('../services/hash');
+var AuthToken = require('../services/jwt');
 
 var Schema = mongoose.Schema;
 
@@ -9,6 +10,10 @@ var userModel = new Schema({
 	},
 	lastname: {
 		type: String
+	},
+	email: {
+		type: String,
+		unique: true
 	},
 	username: {
 		type: String,
@@ -39,6 +44,14 @@ userModel.methods.validatePassword = function(password){
 	var passwordHash = Hasher.getHash(password, this.salt);
 	return this.passwordHash = passwordHash;
 };
+
+userModel.methods.generateAuthToken = function(){
+	AuthToken.generateAuthToken(null, {
+		id: this._id,
+		username: this.username
+	});
+};
+
 
 
 module.exports = userModel;
