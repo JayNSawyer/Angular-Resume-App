@@ -1,22 +1,22 @@
 var jwt = require('jsonwebtoken');
+var moment = require('moment');
 var secrets = require('../config/secrets.js');
 
 var AuthToken = {
-	generateAuthToken: function(days, obj){
+	generateAuthToken: function(obj){
 
-		var expirationDate = new Date();
-		var numberOfDays;
-		if(days == null){
-			numberOfDays = 30; //default to 30 days
+		var expire;
+
+		if(obj.days == null){
+			expire = moment().add('days', 30).valueOf(); //default to 30 days
 		} else {
-			numberOfDays = days;
+			expire = moment().add('days', obj.days).valueOf();
 		}
-		expirationDate.setDate(expirationDate.getDate() + numberOfDays);
 
 		return jwt.sign({
 			_id: obj.id,
 			username: obj.username,
-			expiration: Math.floor(exp.getTime() / 1000) //seconds since epoch
+			expiration: expire
 		}, secrets.SECRET);
 	}
 };

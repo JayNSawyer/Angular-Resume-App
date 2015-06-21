@@ -46,9 +46,10 @@ userModel.methods.validatePassword = function(password){
 };
 
 userModel.methods.generateAuthToken = function(){
-	AuthToken.generateAuthToken(null, {
+	AuthToken.generateAuthToken({
 		id: this._id,
-		username: this.username
+		username: this.username,
+		days: 'default'
 	});
 };
 
