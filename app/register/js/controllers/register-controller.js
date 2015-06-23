@@ -1,12 +1,12 @@
 'use strict'
 
-angular.module('resume').controller('LoginCtrl', [
+angular.module('resume').controller('RegisterCtrl', [
 	'$scope',
 	'$injector',
 	function($scope, $injector){
 		var $rootScope = $injector.get('$rootScope');
 		var AuthService = $injector.get('AuthService');
-		//var CurrentUserService = $injector.get('CurrentUserService');
+	//	var CurrentUserService = $injector.get('CurrentUserService');
 		var vm = this;
 
 		vm.username = '';

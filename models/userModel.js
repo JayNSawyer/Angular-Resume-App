@@ -1,6 +1,6 @@
 var mongoose = require('mongoose');
 var Hasher = require('../services/hash');
-var AuthToken = require('../services/jwt');
+var AuthToken = require('../services/authToken');
 
 var Schema = mongoose.Schema;
 

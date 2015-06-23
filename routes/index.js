@@ -1,6 +1,5 @@
 var express = require('express');
-var authToken = require('express-jwt');
-var secrets = require('../config/secrets.js');
+var authToken = require('../services/authToken');
 var mongoose = require('mongoose');
 var DB = require('../db/collections');
 var router = express.Router();
@@ -12,6 +11,7 @@ var passport = require('passport');
 var validates = validation.validates;
 var User = DB.User;
 var registerUser = register.registerUser;
+var getAuth = authToken.getAuth();
 
 
 /* GET home page. */
@@ -76,7 +76,7 @@ router.post('/register', function(req, res, next){
 
 /* JSON API */
 
-router.get('/api/users', authToken({secret: secrets.SECRET, userProperty: 'payload'}), function(req, res, next){
+router.get('/api/users', getAuth, function(req, res, next){
 	User.find(function(err, users){
 		if(err){
 			console.log(err);

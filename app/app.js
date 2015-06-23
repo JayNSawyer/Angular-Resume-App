@@ -27,6 +27,11 @@ angular.module('resume', ['ngResource', 'ngRoute', 'ui.router'])
 				templateUrl: '/login/views/index.html',
 				controller: 'LoginCtrl'
 			})
+			.state('register', {
+				url: '/register',
+				templateUrl: '/register/views/index.html',
+				controller: 'RegisterCtrl'
+			})
 			.state('main', {
 				url: '/main',
 				templateUrl: '/main/views/index.html',
