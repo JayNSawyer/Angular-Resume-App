@@ -22,44 +22,7 @@
                 <div class="container eternity-form">
                     <div class="login-form-section">
                         <div class="login-content animated bounceIn">
-                            <form name="LoginForm">
-                                <div class="section-title">
-                                    <h3>LogIn to your Account</h3>
-                                </div>
-                                <div class="textbox-wrap">
-                                    <div class="input-group">
-                                        <span class="input-group-addon "><i class="icon-user icon-color"></i></span>
-                                        <input type="text" ng-model="loginCtrl.username" required="required" class="form-control" placeholder="Username" />
-                                    </div>
-                                </div>
-                                <div class="textbox-wrap">
-                                    <div class="input-group">
-                                        <span class="input-group-addon "><i class="icon-key icon-color"></i></span>
-                                        <input type="password" ng-model="loginCtrl.password" required="required" class="form-control " placeholder="Password" />
-                                    </div>
-                                </div>
-                                <div class="login-form-action clearfix">
-                                    <div class="checkbox-wrap">
-
-
-
-                                        <div class="row">
-                                        <div class="checkbox col-md-6">
-
-                                            <span class="checkbox-input col-xs-2">
-                                                 <input class="icheckbox_square-blue checked" type="checkbox" ng-model="loginCtrl.rememberMe" nme="iCheck">
-                                            </span>
-                                            <span class="checkbox-text" class="col-xs-10">&nbsp;Remember Me</span>
-                                        </div>
-                                        <div class="login-form-submit col-md-6">
-                                            <button ng-click="loginCtrl.login(loginCtrl.username, loginCtrl.password)" class="btn btn-success green-btn">LogIn &nbsp; <i class="icon-chevron-right"></i></button>
-                                        </div>
-
-                                        </div>
-
-                                    </div>
-                                </div>
-                            </form>
+                            <div ng-include="'/login/views/form.html'"></div>
                         </div>
                         <div class="login-form-links link1 animated fadeInLeftBig">
                             <h4 class="blue">Don't have an Account?</h4>
