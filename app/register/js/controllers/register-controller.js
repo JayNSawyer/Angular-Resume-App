@@ -7,14 +7,24 @@ angular.module('resume').controller('RegisterCtrl', [
 		var $rootScope = $injector.get('$rootScope');
 		var AuthService = $injector.get('AuthService');
 	//	var CurrentUserService = $injector.get('CurrentUserService');
+	//  var RegisterService = $injector.get('RegisterService');
 		var vm = this;
 
+
+		vm.firstname = '';
+		vm.lastname = '';
 		vm.username = '';
+		vm.email = '';
 		vm.password = '';
-		vm.validationObject;
+		vm.passwordConfirmation = '';
 
-		vm.login = function(username, password){
+		vm.error = false;
 
+
+		//vm.validationObject;
+
+		vm.submit = function(){
+			console.log('submitted!');
 		};
 
 		// vm.login = function(username, password){
