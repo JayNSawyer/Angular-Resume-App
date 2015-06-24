@@ -16,6 +16,9 @@ var AuthToken = {
 
 		return jwt.sign({
 			_id: obj.id,
+			firstname: obj.firstname,
+			lastname: obj.lastname,
+			email: obj.email,
 			username: obj.username,
 			expiration: expire
 		}, secrets.SECRET);

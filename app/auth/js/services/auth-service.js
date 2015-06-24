@@ -5,19 +5,11 @@ angular.module('resume')
 		'$injector',
 		function ($injector){
 			var $rootScope = $injector.get('$rootScope'),
-				$q = $injector.get('$q'),
 				$http = $injector.get('$http'),
 				$window = $injector.get('$window'),
 				DecodeTokenService = $injector.get('DecodeTokenService');
-				ValidationService = $injector.get('ValidationService');
 
 			var self = this;	
-			var validationObject;
-
-			var mockCredentials = {
-				username: 'TimRobbins81',
-				password: 'timmy81'
-			};
 
 			var cachedToken;
 
@@ -33,34 +25,34 @@ angular.module('resume')
 				return cachedToken;
 			};
 
-			var isAuthenticated = function(){
+			var getPayload = function(){
 				var token = getToken();
-				return token;
-			};
+				var payload;
 
+				if(!token){
+					return false;
+				} else {
+					payload = DecodeTokenService.decodeToken(token);
+					return payload;
+				}	
+			}
+
+			var isAuthenticated = function(){
+				var payload = getPayload();
+				if(!payload){
+					return false;
+				} else {
+					return payload.expiration > Date.now / 1000;
+				}
+			};
 
 			var AuthService = {
 				saveToken: saveToken,
 				getToken: getToken,
-				isAuthenticated: isAuthenticated
-				// verifyCredentials: function(username, password){
-				// 	if (username && password){
-				// 		if (username === mockCredentials.username && password === mockCredentials.password){
-				// 			validationObject = ValidationService.setValidationObject('verified');
-				// 			return validationObject;
-				// 		} else if (username === mockCredentials.username && password !== mockCredentials.password){
-				// 			validationObject = ValidationService.setValidationObject('password');
-				// 			return validationObject;
-				// 		} else if (username !== mockCredentials.username && password === mockCredentials.password){
-				// 			validationObject = ValidationService.setValidationObject('username');
-				// 			return validationObject;
-				// 		} else {
-				// 			validationObject = ValidationService.setValidationObject('error');
-				// 			return validationObject;
-				// 		}
-				// 	}
-				// }
-			}
+				isAuthenticated: isAuthenticated,
+				getPayload: getPayload
+			};
+
 			return AuthService;
 		}
 
