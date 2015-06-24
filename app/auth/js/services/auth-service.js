@@ -8,6 +8,7 @@ angular.module('resume')
 				$q = $injector.get('$q'),
 				$http = $injector.get('$http'),
 				$window = $injector.get('$window'),
+				DecodeTokenService = $injector.get('DecodeTokenService');
 				ValidationService = $injector.get('ValidationService');
 
 			var self = this;	
@@ -36,6 +37,7 @@ angular.module('resume')
 				var token = getToken();
 				return token;
 			};
+
 
 			var AuthService = {
 				saveToken: saveToken,
