@@ -5,36 +5,42 @@ angular.module('resume')
 		'$injector',
 		function ($injector){
 			var $rootScope = $injector.get('$rootScope'),
-				$q = $injector.get('$q'),
 				$http = $injector.get('$http'),
 				$window = $injector.get('$window'),
-				ValidationService = $injector.get('ValidationService');
+				AuthService = $injector.get('AuthService');
 
 			var self = this;	
 
-			var setProfile = function(username, token){
-				profile.username = username;
-				profile.token = token;
-			}
-
-			var getToken = function(){
-				if(!cachedToken){
-					cachedToken = $window.localStorage['userToken'];
-				}
-				return cachedToken;
+			var currentUser = {
+				firstname: '',
+				lastname: '',
+				email: '',
+				username: '',
+				token: '',
+				loggedIn: false
 			};
 
-			var isAuthenticated = function(){
-				var token = getToken();
-				return token;
+			var init = function(){
+				if(AuthService.isAuthenticated()){
+					
+					var token = AuthService.getToken();
+					var payload = AuthService.getPayload();
+			
+					currentUser.firstname = payload.firstname;
+					currentUser.lastname = payload.lastname;
+					currentUser.email = payload.email;
+					currentUser.username = payload.username;
+					currentUser.token = token;
+					currentUser.loggedIn = true;
+
+					return currentUser;
+				}
 			};
 
 			var CurrentUserService = {
-				setProfile: setProfile,
-				getToken: getToken,
-				isAuthenticated: isAuthenticated
-	
-			}
+				init: init
+			};
+
 			return CurrentUserService;
 		}
 
