@@ -9,19 +9,19 @@
                 <div class="textbox-wrap">
                     <div class="input-group">
                         <span class="input-group-addon "><i class="icon-user icon-color"></i></span>
-                        <input ng-model="registerCtrl.firstname" name="firstname" type="text" class="form-control " placeholder="First Name" required />
+                        <input ng-model="registerCtrl.user.firstname" name="firstname" type="text" class="form-control " placeholder="First Name" required />
                     </div>
                 </div>
                 <div class="textbox-wrap">
                     <div class="input-group">
                         <span class="input-group-addon "><i class="icon-user icon-color"></i></span>
-                        <input ng-model="registerCtrl.lastname" name="lastname" type="text" class="form-control " placeholder="Last Name" required />
+                        <input ng-model="registerCtrl.user.lastname" name="lastname" type="text" class="form-control " placeholder="Last Name" required />
                     </div>
                 </div>
                 <div class="textbox-wrap">
                     <div class="input-group">
                         <span class="input-group-addon "><i class="icon-envelope icon-color"></i></span>
-                        <input ng-model="registerCtrl.email" name="email" type="email" class="form-control " placeholder="Email" required />
+                        <input ng-model="registerCtrl.user.email" name="email" type="email" class="form-control " placeholder="Email" required />
                     </div>
                 </div>
 
@@ -33,19 +33,19 @@
                 <div class="textbox-wrap">
                     <div class="input-group">
                         <span class="input-group-addon "><i class="icon-user icon-color"></i></span>
-                        <input ng-model="registerCtrl.username" name="username" type="text" class="form-control " placeholder="Username" required />
+                        <input ng-model="registerCtrl.user.username" name="username" type="text" class="form-control " placeholder="Username" required />
                     </div>
                 </div>
                 <div class="textbox-wrap">
                     <div class="input-group">
                         <span class="input-group-addon "><i class="icon-key icon-color"></i></span>
-                        <input ng-model="registerCtrl.password" name="password" type="password" class="form-control " placeholder="Password" required />
+                        <input ng-model="registerCtrl.user.password" name="password" type="password" class="form-control " placeholder="Password" required />
                     </div>
                 </div>
                 <div class="textbox-wrap">
                     <div class="input-group">
                         <span class="input-group-addon "><i class="icon-key icon-color"></i></span>
-                        <input ng-model="registerCtrl.passwordConfirmation" name="passwordConfirmation" same-As="registerCtrl.password" type="password" class="form-control " placeholder="Confirm Password" required />
+                        <input ng-model="registerCtrl.user.passwordConfirmation" name="passwordConfirmation" same-As="registerCtrl.user.password" type="password" class="form-control " placeholder="Confirm Password" required />
                     </div>
                     <div class="help-block" ng-show="registerForm.passwordConfirmation.$dirty && registerForm.passwordConfirmation.$invalid">
                         <div ng-message="required">Your password must match!</div>
