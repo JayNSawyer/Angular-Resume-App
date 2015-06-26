@@ -1,15 +1,18 @@
 function validateLogin(body, statusObj){
+	var status = statusObj;
 	if(!body.username){
-		statusObj.message = 'Please enter your username';
+		status.message = 'Please enter your username';
 	} else if (!body.password){
-		statusObj.message = 'Please enter your password';
+		status.message = 'Please enter your password';
 	} else {
-		statusObj.message = 'You have successfully logged in';
-		statusObj.presence = true;
+		status.message = 'You have successfully logged in';
+		status.presence = true;
 	}
+	return status;
 }
 
 function validateRegister(body, statusObj){
+	var status = statusObj;
 	if(!body.email){
 		status.message = 'Please fill out your email';
 	} else if (!body.password){
@@ -19,28 +22,33 @@ function validateRegister(body, statusObj){
 	} else if (!body.lastname){
 		status.message = 'Please fill out your last name';
 	} else {
-		status.message = 'You have successfully logged in';
+		status.message = 'You have successfully registered';
 		status.presence = true;
 	}
+	console.log(status);
+	return status;
 }
 
 
-function validates (obj){
-	var status = {
+function validates (body, feature){
+	var currentStatus = {
 		message: '',
 		presence: false
 	};
 
-	if (obj.feature === 'login'){
-		validateLogin(obj.body, status);
-		return status;
+	if (feature === 'login'){
+		return validateLogin(body, currentStatus);
 	}
 
-	if (obj.feature === 'register'){
-		validateRegister(obj.body, status);
-		return status;
+	if (feature === 'register'){
+		return validateRegister(body, currentStatus);
 	}
 
 }
 
-module.exports = validates;
+var validationObject = {
+	validates: validates
+};
+
+
+module.exports = validationObject;

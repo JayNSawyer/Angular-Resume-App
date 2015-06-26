@@ -7,15 +7,16 @@ angular.module('resume', ['ngResource', 'ngRoute', 'ui.router'])
 		function ($scope, $injector){
 			var $rootScope = $injector.get('$rootScope'),
 				$http = $injector.get('$http'),
+				CurrentUserService = $injector.get('CurrentUserService'),
 				UserService = $injector.get('UserService');
 
-			var self = this;	
+			var vm = this;	
 
 			$scope.greeting = 'Welcome to the Resume App!';
 
-			UserService.getUsers().then(function(data){
-				$scope.users = data;
-			});
+			// UserService.getUsers().then(function(data){
+			// 	$scope.users = data;
+			// });
 		}
 	]).config([
 	'$stateProvider',
@@ -25,17 +26,33 @@ angular.module('resume', ['ngResource', 'ngRoute', 'ui.router'])
 			.state('login', {
 				url: '/login',
 				templateUrl: '/login/views/index.html',
-				controller: 'LoginCtrl'
+				controller: 'LoginCtrl',
+				onEnter: ['$location', 'AuthService', function($location, AuthService){
+					if (AuthService.isAuthenticated()){
+						$location.path('main');
+					}
+				}]
 			})
 			.state('register', {
 				url: '/register',
 				templateUrl: '/register/views/index.html',
-				controller: 'RegisterCtrl'
+				controller: 'RegisterCtrl',
+				onEnter: ['$state', 'AuthService', function($location, AuthService){
+					if (AuthService.isAuthenticated()){
+						$location.path('main');
+					}
+				}]
 			})
 			.state('main', {
 				url: '/main',
 				templateUrl: '/main/views/index.html',
-				controller: 'MainCtrl'
+				controller: 'MainCtrl',
+				onEnter: ['$location', 'AuthService', function($location, AuthService){
+					if (AuthService.isAuthenticated()){
+						var payload = AuthService.getPayload();
+					//	console.log(payload);
+					}
+				}]
 			});
 
 		$urlRouterProvider.otherwise('main');	

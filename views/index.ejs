@@ -9,6 +9,12 @@
 
     <title><%= title %></title>
 
+    <style>
+    a[ng-click]{
+        cursor: pointer;
+    }
+    </style>
+
     <!-- vendor non-JS assets -->
     <link rel="stylesheet" href="/bootstrap/dist/css/bootstrap.min.css">
     <!--<link rel='stylesheet' href='/login/css/style.css' />-->
@@ -50,8 +56,8 @@
                 <a class="navbar-brand" href="#">Resume App</a>
             </div>
             <!-- Collect the nav links, forms, and other content for toggling -->
-            <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-                <ul class="nav navbar-nav navbar-right">
+            <div ng-controller="NavigationCtrl as navigationCtrl" class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+                <ul ng-if="!navigationCtrl.currentUser.loggedIn" class="nav navbar-nav navbar-right">
                     <li ui-sref-active="active">
                         <a ui-sref="main">Home</a>
                     </li>
@@ -102,6 +108,18 @@
                         </ul>
                     </li>
                 </ul>
+                <ul ng-if="navigationCtrl.currentUser.loggedIn" class="nav navbar-nav navbar-right">
+                     <li ui-sref-active="active">
+                        <a ui-sref="main">Home</a>
+                    </li>
+                    <li ui-sref-active="active">
+                        <a href="#" ng-click="navigationCtrl.logout()">Logout</a>
+                    </li>
+                    <li>
+                        <a href="#">Welcome back, {{navigationCtrl.currentUser.firstname}}!</a>
+                    </li>
+            
+                </ul>
             </div>
             <!-- /.navbar-collapse -->
         </div>
@@ -151,13 +169,20 @@
     <script src="/auth/js/services/validation-service.js"></script>
     <script src="/shared/js/services/decode-token-service.js"></script>
     <script src="/auth/js/services/auth-service.js"></script>
-    <script src="/auth/js/services/current-user-service.js"></script>
+    <script src="/user/js/services/current-user-service.js"></script>
     <script src="/register/js/services/register-service.js"></script>
+    <script src="/login/js/services/login-service.js"></script>
+    <script src="/logout/js/services/logout-service.js"></script>
+
+
 
     <!-- controllers -->
     <script src="/main/js/controllers/main-controller.js"></script>
     <script src="/login/js/controllers/login-controller.js"></script>
+    <script src="/logout/js/controllers/logout-controller.js"></script>
     <script src="/register/js/controllers/register-controller.js"></script>
+    <script src="/navigation/js/controllers/navigation-controller.js"></script>
+
 
     <!-- directives -->
     <script src="/shared/js/directives/sameAs.js"></script>

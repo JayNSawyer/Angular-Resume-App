@@ -1,6 +1,10 @@
 var mongoose = require('mongoose');
 var Hasher = require('../services/hash');
-var AuthToken = require('../services/authToken');
+var jwt = require('jsonwebtoken');
+var secrets = require('../config/secrets.js');
+var moment = require('moment');
+
+
 
 var Schema = mongoose.Schema;
 
@@ -37,7 +41,7 @@ userModel.methods.toJSON = function(){
 
 userModel.methods.setPassword = function(password){
 	this.salt = Hasher.setSalt();
-	this.passwordHash = Hasher.setHash(password, salt);
+	this.passwordHash = Hasher.setHash(password, this.salt);
 };
 
 userModel.methods.validatePassword = function(password){
@@ -45,15 +49,23 @@ userModel.methods.validatePassword = function(password){
 	return this.passwordHash = passwordHash;
 };
 
-userModel.methods.generateAuthToken = function(){
-	AuthToken.generateAuthToken({
-		id: this._id,
+userModel.methods.generateAuthToken = function(days){
+	var expire;
+
+	if(!days){
+		expire = moment().add('days', 30).valueOf(); //default to 30 days
+	} else {
+		expire = moment().add('days', days).valueOf();
+	}
+
+	return jwt.sign({
+		_id: this._id,
 		firstname: this.firstname,
 		lastname: this.lastname,
 		email: this.email,
 		username: this.username,
-		days: 'default'
-	});
+		expiration: expire
+	}, secrets.SECRET);
 };
 
 

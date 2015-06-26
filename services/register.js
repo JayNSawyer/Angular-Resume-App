@@ -1,13 +1,19 @@
-function registerUser (body){
-	var user = new User();
+var mongoose = require('mongoose');
+var DB = require('../db/collections');
+var User = DB.User;
 
-	user.firstname = body.firstname;
-	user.lastname = body.lastname;
-	user.email = body.email;
-	user.username = body.username;
-	user.setPassword(body.password);
+var register = {
+	registerUser: function(body){
+		var user = new User();
 
-	return user;
-}
+		user.firstname = body.firstname;
+		user.lastname = body.lastname;
+		user.email = body.email;
+		user.username = body.username;
+		user.setPassword(body.password);
 
-module.exports = registerUser;
+		return user;
+	}
+};
+
+module.exports = register;

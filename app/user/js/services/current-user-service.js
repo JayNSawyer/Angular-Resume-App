@@ -7,6 +7,7 @@ angular.module('resume')
 			var $rootScope = $injector.get('$rootScope'),
 				$http = $injector.get('$http'),
 				$window = $injector.get('$window'),
+				$q = $injector.get('$q'),
 				AuthService = $injector.get('AuthService');
 
 			var self = this;	
@@ -16,11 +17,13 @@ angular.module('resume')
 				lastname: '',
 				email: '',
 				username: '',
-				token: '',
 				loggedIn: false
 			};
 
 			var init = function(){
+
+				var deferred = $q.defer();
+
 				if(AuthService.isAuthenticated()){
 					
 					var token = AuthService.getToken();
@@ -30,11 +33,14 @@ angular.module('resume')
 					currentUser.lastname = payload.lastname;
 					currentUser.email = payload.email;
 					currentUser.username = payload.username;
-					currentUser.token = token;
 					currentUser.loggedIn = true;
 
-					return currentUser;
+					deferred.resolve(currentUser);
+				} else {
+					deferred.reject({message: 'there was an error retrieving the current user!'});
 				}
+
+				return deferred.promise;
 			};
 
 			var CurrentUserService = {

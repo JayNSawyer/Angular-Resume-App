@@ -5,29 +5,30 @@ angular.module('resume').controller('LoginCtrl', [
 	'$injector',
 	function($scope, $injector){
 		var $rootScope = $injector.get('$rootScope');
+		var $state = $injector.get('$state');
 		var AuthService = $injector.get('AuthService');
-		//var CurrentUserService = $injector.get('CurrentUserService');
+		var LoginService = $injector.get('LoginService');
+
 		var vm = this;
 
-		vm.username = '';
-		vm.password = '';
-		vm.validationObject;
+		vm.user = {};
 
-		vm.login = function(username, password){
-
+		vm.submit = function(){
+			LoginService.login(vm.user).then(function(response){
+				console.log(response);
+				var data = response.data;
+				var token = data.token;
+				AuthService.saveToken(token);
+				var payload = AuthService.getPayload();
+				//broadcast the event
+				$rootScope.$broadcast('user-logged-in', {
+					payload: payload
+				});
+			}, function(response){
+				console.log(response.data);
+			}).then(function(response){
+				$state.go('main');
+			});
 		};
-
-		// vm.login = function(username, password){
-		// 	vm.loginObject = Auth.verifyCredentials(username, password);
-		// 	if(vm.loginObject.boolean){ //if true, then credentials checked
-		// 		 //log the user in
-		// 		console.log(vm.loginObject.message);
-
-		// 		//call the UserService, which will set the vm.username and make a call to /api/users/:user to grab the user's profile
-		
-		// 	} else if (vm.loginObject.error) {
-		// 		console.log(vm.loginObject.message);
-		// 	}
-		// }
 	}
 ]);

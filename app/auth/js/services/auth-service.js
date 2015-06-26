@@ -25,6 +25,10 @@ angular.module('resume')
 				return cachedToken;
 			};
 
+			var removeToken = function(){
+				$window.localStorage.clear();
+			};
+
 			var getPayload = function(){
 				var token = getToken();
 				var payload;
@@ -38,11 +42,9 @@ angular.module('resume')
 			}
 
 			var isAuthenticated = function(){
-				var payload = getPayload();
-				if(!payload){
-					return false;
-				} else {
-					return payload.expiration > Date.now / 1000;
+				var token = getToken();
+				if(token){
+					return true;
 				}
 			};
 
@@ -50,7 +52,8 @@ angular.module('resume')
 				saveToken: saveToken,
 				getToken: getToken,
 				isAuthenticated: isAuthenticated,
-				getPayload: getPayload
+				getPayload: getPayload,
+				removeToken: removeToken
 			};
 
 			return AuthService;

@@ -14,11 +14,14 @@ angular.module('resume').controller('RegisterCtrl', [
 
 		vm.submit = function(){
 			RegisterService.register(vm.user).then(function(response){
+				console.log(response);
 				var data = response.data;
 				var token = data.token;
 				AuthService.saveToken(token);
-			}, function(error){
-				console.log(error.data);
+			}, function(response){
+				console.log(response.data);
+			}).then(function(response){
+				$state.go('main');
 			});
 		};
 	}
