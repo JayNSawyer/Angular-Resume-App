@@ -9,6 +9,7 @@ angular.module('resume').controller('NavigationCtrl', [
 		var LoginService = $injector.get('LoginService');
 		var LogoutService = $injector.get('LogoutService');
 		var CurrentUserService = $injector.get('CurrentUserService');
+		var AlertService = $injector.get('AlertService');
 		var $location = $injector.get('$location');
 		var vm = this;
 
@@ -25,13 +26,22 @@ angular.module('resume').controller('NavigationCtrl', [
 		};
 
 		vm.logout = function(){
-			$rootScope.$broadcast('user-logged-out', {
-				auth: false
-			});
 			
 			LogoutService.logout().then(function(data){
-				vm.currentUser = '';
-				$location.path( "/main" );
+
+				AlertService.emitAlert({event: 'user-logged-out'}).then(function(alert){
+
+					var logoutAlert = alert;
+					$rootScope.$emit('user-logged-out', {
+						auth: false,
+						payload: null,
+						alert: logoutAlert
+					});
+
+					vm.currentUser = '';
+					$location.path( "/main" );
+
+				});
 			});
 		};
 
@@ -43,7 +53,7 @@ angular.module('resume').controller('NavigationCtrl', [
 		vm.currentUser;
 		
 		//	bootstrap the entire app with the current user info by listening to user login/logout
-		$rootScope.$on('user-logged-in', function(event, msg){
+		$scope.$onRootScope('user-logged-in', function(event, msg){
 			if(msg.payload){
 				CurrentUserService.init().then(function(currentUser){
 					vm.currentUser = currentUser;
@@ -51,11 +61,11 @@ angular.module('resume').controller('NavigationCtrl', [
 			}
 		});
 
-		$rootScope.$on('user-logged-out', function(event, msg){
-			if(msg.auth === false){
-				vm.currentUser = '';
-			}
-		});
+		// $rootScope.$on('user-logged-out', function(event, msg){
+		// 	if(msg.auth === false){
+		// 		vm.currentUser = '';
+		// 	}
+		// });
 
 		// $rootScope.$on('user-logged-out', function(event, msg){
 		// 	console.log('logged out!');

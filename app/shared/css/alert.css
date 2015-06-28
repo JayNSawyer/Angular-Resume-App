@@ -1,0 +1,39 @@
+.alert-container {
+    z-index: 1;
+    position: fixed;
+}
+
+.alert-container {
+    background: transparent;
+}
+
+.alert-success {
+    background-color: green; 
+    color: white;
+}
+
+.alert-info {
+    background-color: #d9edf7; 
+	color: black;
+}
+
+
+.alert {
+	max-width: 200px;
+	margin: 0 auto;
+	margin-right: 20px;
+}
+
+.alert-danger {
+    background-color: red;
+}
+
+.main-alert {
+    max-width: 400px;
+    margin: 0 auto;
+    position: absolute;
+}
+
+/*.alert-hidden {
+    display: none;
+}*/

@@ -1,0 +1,53 @@
+[
+	{
+
+		"type": "success",
+		"event": "user-logged-in",
+		"title": "Hey..",
+		"message": "You have logged in!",
+		"status": {
+			"displayed": true,
+			"show": true
+		}
+	},
+	{
+		"type": "success",
+		"event": "user-registered",
+		"title": "Hey..",
+		"message": "You have succesfully registered!",
+		"status": {
+			"displayed": true,
+			"show": true
+		}
+	},
+	{
+		"type": "success",
+		"event": "user-logged-out",
+		"title": "Hey..",
+		"message": "You have logged out!",
+		"status": {
+			"displayed": true,
+			"show": true
+		}
+	},
+	{
+		"type": "info",
+		"event": "click-me",
+		"title": "Hey..",
+		"message": "You clicked me!",
+		"status": {
+			"displayed": true,
+			"show": true
+		}
+	},
+	{
+		"type": "error",
+		"event": "http-get-error",
+		"title": "Hey..",
+		"message": "An HTTP GET request failed!",
+		"status": {
+			"displayed": true,
+			"show": true
+		}
+	}
+]

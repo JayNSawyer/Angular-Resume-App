@@ -8,15 +8,13 @@ angular.module('resume', ['ngResource', 'ngRoute', 'ui.router'])
 			var $rootScope = $injector.get('$rootScope'),
 				$http = $injector.get('$http'),
 				CurrentUserService = $injector.get('CurrentUserService'),
+				$timeout = $injector.get('$timeout'),
+				AlertService = $injector.get('AlertService'),
 				UserService = $injector.get('UserService');
 
 			var vm = this;	
 
 			$scope.greeting = 'Welcome to the Resume App!';
-
-			// UserService.getUsers().then(function(data){
-			// 	$scope.users = data;
-			// });
 		}
 	]).config([
 	'$stateProvider',
@@ -57,4 +55,19 @@ angular.module('resume', ['ngResource', 'ngRoute', 'ui.router'])
 
 		$urlRouterProvider.otherwise('main');	
 	}
-	]);
+	]).config(['$provide', function($provide){		
+		$provide.decorator('$rootScope', ['$delegate', function($delegate){
+
+		    Object.defineProperty($delegate.constructor.prototype, '$onRootScope', {
+		        value: function(name, listener){
+		            var unsubscribe = $delegate.$on(name, listener);
+		            this.$on('$destroy', unsubscribe);
+
+		            return unsubscribe;
+		        },
+		        enumerable: false
+		    });
+
+		    return $delegate;
+		}]);
+	}]);
