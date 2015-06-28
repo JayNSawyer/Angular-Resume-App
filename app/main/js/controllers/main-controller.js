@@ -1,6 +1,6 @@
 'use strict'
 
-angular.module('resume').controller('MainCtrl', [
+angular.module('resume.main').controller('MainCtrl', [
 	'$scope',
 	'$injector',
 	function($scope, $injector){

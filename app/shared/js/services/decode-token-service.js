@@ -1,6 +1,6 @@
 'use strict';
 
-angular.module('resume')
+angular.module('resume.shared')
 	.factory('DecodeTokenService', [
 		'$injector',
 		function ($injector){

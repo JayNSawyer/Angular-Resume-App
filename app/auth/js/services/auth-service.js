@@ -1,6 +1,6 @@
 'use strict';
 
-angular.module('resume')
+angular.module('resume.auth')
 	.factory('AuthService', [
 		'$injector',
 		function ($injector){

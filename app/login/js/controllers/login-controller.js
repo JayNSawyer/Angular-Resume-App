@@ -1,6 +1,6 @@
 'use strict'
 
-angular.module('resume').controller('LoginCtrl', [
+angular.module('resume.login').controller('LoginCtrl', [
 	'$scope',
 	'$injector',
 	function($scope, $injector){
@@ -15,12 +15,9 @@ angular.module('resume').controller('LoginCtrl', [
 
 		vm.user = {};
 
-	//	AlertService.addEvent('you-clicked-me', 'You clicked me!!');
-
+		/* click me test */
 		vm.clickMe = function(){
-			console.log('you clicked me!');
-
-			AlertService.emitAlert({type: 'success', event: 'click-me'}).then(function(alert){
+			AlertService.emitAlert({event: 'click-me'}).then(function(alert){
 				console.log(alert.type);
 				$rootScope.$emit('click-me', {
 					payload: null,
@@ -28,20 +25,15 @@ angular.module('resume').controller('LoginCtrl', [
 				});
 			});
 		};
-
-
+		/* end test */
 
 		vm.submit = function(){
 			LoginService.login(vm.user).then(function(response){
-				console.log(response);
 				AuthService.saveToken(response.data.token);
-
-				//broadcast this login event: 1. specify the payload; 2. specify the alert to display
 				var payload = AuthService.getPayload();
-				AlertService.emitAlert({type: 'success', event: 'user-logged-in'}).then(function(alert){
 
-					//var loginAlert = alert;
-					//broadcast the event
+				AlertService.emitAlert({event: 'user-logged-in'}).then(function(alert){
+
 					$rootScope.$emit('user-logged-in', {
 						payload: payload,
 						alert: alert
@@ -50,9 +42,7 @@ angular.module('resume').controller('LoginCtrl', [
 			}, function(response){
 				console.log(response.data);
 			}).then(function(response){
-		//		$timeout(function(){
-					$state.go('main');
-		//		}, 2000);
+				$state.go('main');
 			});
 		};
 	}

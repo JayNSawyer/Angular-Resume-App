@@ -1,6 +1,6 @@
 'use strict'
 
-angular.module('resume').controller('NavigationCtrl', [
+angular.module('resume.navigation').controller('NavigationCtrl', [
 	'$scope',
 	'$injector',
 	function($scope, $injector){
@@ -45,11 +45,6 @@ angular.module('resume').controller('NavigationCtrl', [
 			});
 		};
 
-		// vm.logout = function(){
-		// 	LogoutService.logout();
-		// 	vm.currentUser = '';
-		// };
-
 		vm.currentUser;
 		
 		//	bootstrap the entire app with the current user info by listening to user login/logout
@@ -60,17 +55,6 @@ angular.module('resume').controller('NavigationCtrl', [
 				});
 			}
 		});
-
-		// $rootScope.$on('user-logged-out', function(event, msg){
-		// 	if(msg.auth === false){
-		// 		vm.currentUser = '';
-		// 	}
-		// });
-
-		// $rootScope.$on('user-logged-out', function(event, msg){
-		// 	console.log('logged out!');
-		// });
-
 
 		$scope.$watch(function(){
 			return vm.currentUser; //watch this vm

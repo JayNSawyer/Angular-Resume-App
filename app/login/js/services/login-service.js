@@ -1,6 +1,6 @@
 'use strict';
 
-angular.module('resume')
+angular.module('resume.login')
 	.factory('LoginService', [
 		'$injector',
 		function ($injector){

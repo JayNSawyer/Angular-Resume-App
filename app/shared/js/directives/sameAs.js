@@ -1,6 +1,6 @@
 'use strict'
 
-angular.module('resume').directive('sameAs', [
+angular.module('resume.shared').directive('sameAs', [
 	'$rootScope',
 	function($rootScope){
 		return {

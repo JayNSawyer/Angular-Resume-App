@@ -1,19 +1,17 @@
 'use strict';
 
-angular.module('resume')
+angular.module('resume.shared', [])
 	.directive('alert', ['$rootScope', '$timeout', 'AlertService', function($rootScope, $timeout, AlertService){
 		return {
 			scope: {
-				'event': '=',
+				'event': '='
 			},
 			restrict: 'E',
 			replace: true,
 			templateUrl: '/shared/views/alert-content.html',
 			link: function(scope, element, attributes){
-
 				var bootStrapData = function(){
 					AlertService.fetchAlerts().then(function(alertCollection){
-
 						scope.alertCollection = alertCollection.data;
 
 						for(var i = 0; i < scope.alertCollection.length; i++){
@@ -33,10 +31,7 @@ angular.module('resume')
 
 					});
 				};
-
 				bootStrapData();
-
 			} 
-			
 		};
 	}])

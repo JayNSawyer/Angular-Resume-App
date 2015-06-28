@@ -1,6 +1,6 @@
 'use strict';
 
-angular.module('resume')
+angular.module('resume.register')
 	.factory('RegisterService', [
 		'$injector',
 		function ($injector){

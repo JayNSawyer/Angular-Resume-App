@@ -1,6 +1,6 @@
 'use strict'
 
-angular.module('resume').controller('LogoutCtrl', [
+angular.module('resume.logout').controller('LogoutCtrl', [
 	'$scope',
 	'$injector',
 	function($scope, $injector){

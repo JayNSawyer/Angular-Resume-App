@@ -1,6 +1,18 @@
 'use strict';
 
-angular.module('resume', ['ngResource', 'ngRoute', 'ui.router'])
+angular.module('resume', [
+	'ngResource', 
+	'ngRoute', 
+	'ui.router',
+	'resume.auth',
+	'resume.login',
+	'resume.logout',
+	'resume.main',
+	'resume.navigation',
+	'resume.register',
+	'resume.shared',
+	'resume.user'
+	])
 	.controller('AppCtrl', [
 		'$scope',
 		'$injector',
@@ -35,7 +47,7 @@ angular.module('resume', ['ngResource', 'ngRoute', 'ui.router'])
 				url: '/register',
 				templateUrl: '/register/views/index.html',
 				controller: 'RegisterCtrl',
-				onEnter: ['$state', 'AuthService', function($location, AuthService){
+				onEnter: ['$location', 'AuthService', function($location, AuthService){
 					if (AuthService.isAuthenticated()){
 						$location.path('main');
 					}
@@ -48,7 +60,6 @@ angular.module('resume', ['ngResource', 'ngRoute', 'ui.router'])
 				onEnter: ['$location', 'AuthService', function($location, AuthService){
 					if (AuthService.isAuthenticated()){
 						var payload = AuthService.getPayload();
-					//	console.log(payload);
 					}
 				}]
 			});

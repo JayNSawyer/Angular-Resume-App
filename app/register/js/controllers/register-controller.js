@@ -1,6 +1,6 @@
 'use strict'
 
-angular.module('resume').controller('RegisterCtrl', [
+angular.module('resume.register').controller('RegisterCtrl', [
 	'$scope',
 	'$injector',
 	function($scope, $injector){
@@ -8,6 +8,8 @@ angular.module('resume').controller('RegisterCtrl', [
 		var $state = $injector.get('$state');
 		var AuthService = $injector.get('AuthService');
 		var RegisterService = $injector.get('RegisterService');
+		var AlertService = $injector.get('AlertService');
+
 		var vm = this;
 
 		vm.user = {};
@@ -18,6 +20,7 @@ angular.module('resume').controller('RegisterCtrl', [
 				var data = response.data;
 				var token = data.token;
 				AuthService.saveToken(token);
+
 			}, function(response){
 				console.log(response.data);
 			}).then(function(response){

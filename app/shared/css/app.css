@@ -1,9 +1,14 @@
 body {
-  font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
+  font: 14px "Lucida Grande"; Helvetica, Arial, sans-serif;
+  /* z-index: 100; */
 }
 
 a {
   color: #00B7FF;
+}
+
+a[ng-click]{
+	cursor: pointer;
 }
 
 .btn {
