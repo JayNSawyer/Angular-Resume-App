@@ -15,11 +15,15 @@
     "grunt": "^0.4.5",
     "jasmine": "^2.3.1",
     "jsonwebtoken": "^5.0.1",
+    "lodash": "^3.10.0",
     "moment": "^2.10.3",
     "mongoose": "^4.0.5",
     "morgan": "~1.5.3",
     "passport": "^0.2.2",
     "passport-local": "^1.0.0",
     "serve-favicon": "~2.2.1"
+  },
+  "devDependencies": {
+    "grunt-nodemon": "^0.4.0"
   }
 }

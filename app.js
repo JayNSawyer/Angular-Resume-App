@@ -60,4 +60,12 @@ app.use(function(err, req, res, next) {
 });
 
 
+// var debug = require('debug')('resume-app:server');
+// var http = require('http');
+
+// app.listen(3000, function(){
+//   console.log('Listening....');
+// })
+
+
 module.exports = app;
