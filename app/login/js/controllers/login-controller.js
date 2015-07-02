@@ -45,5 +45,6 @@ angular.module('resume.login').controller('LoginCtrl', [
 				$state.go('main');
 			});
 		};
+
 	}
 ]);

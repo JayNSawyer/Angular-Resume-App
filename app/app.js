@@ -1,9 +1,11 @@
 'use strict';
 
 angular.module('resume', [
+	//Angular  modules
 	'ngResource', 
 	'ngRoute', 
-	'ui.router',
+
+	//Custom modules
 	'resume.auth',
 	'resume.login',
 	'resume.logout',
@@ -11,7 +13,10 @@ angular.module('resume', [
 	'resume.navigation',
 	'resume.register',
 	'resume.shared',
-	'resume.user'
+	'resume.user',
+
+	//Vendor modules
+	'ui.router'
 	])
 	.controller('AppCtrl', [
 		'$scope',
@@ -27,6 +32,10 @@ angular.module('resume', [
 			var vm = this;	
 
 			$scope.greeting = 'Welcome to the Resume App!';
+
+			$scope.closeAlert = function(){
+				console.log('You called me!');
+			};
 		}
 	]).config([
 	'$stateProvider',

@@ -18,7 +18,7 @@
 }
 
 
-.alert {
+.alert, .alert .close-alert {
 	max-width: 200px;
 	margin: 0 auto;
 	margin-right: 20px;
@@ -27,6 +27,25 @@
 .alert-danger {
     background-color: red;
 }
+
+.ninja {
+    width: 5px;
+    height: 5px;
+    visibility: 'hidden';
+}
+
+
+.close-alert {
+  /*  width: 100px;
+    height: 100px;
+     background: black; 
+    display: none;
+    right: 10px; 
+    position: absolute; */
+    width: 100px;
+    height: 100px;
+}
+
 
 .main-alert {
     max-width: 400px;
