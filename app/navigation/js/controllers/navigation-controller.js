@@ -29,31 +29,20 @@ angular.module('resume.navigation').controller('NavigationCtrl', [
 			
 			LogoutService.logout().then(function(data){
 
-				AlertService.emitAlert({event: 'user-logged-out'}).then(function(alert){
-
-					var logoutAlert = alert;
-					$rootScope.$emit('user-logged-out', {
-						auth: false,
-						payload: null,
-						alert: logoutAlert
-					});
-
+				AlertService.emitAlert('user-logged-out').then(function(alert){
 					vm.currentUser = '';
 					$location.path( "/main" );
-
 				});
 			});
 		};
 
 		vm.currentUser;
 		
-		//	bootstrap the entire app with the current user info by listening to user login/logout
 		$scope.$onRootScope('user-logged-in', function(event, msg){
-			if(msg.payload){
-				CurrentUserService.init().then(function(currentUser){
-					vm.currentUser = currentUser;
-				});
-			}
+			CurrentUserService.init().then(function(currentUser){
+				vm.currentUser = currentUser;
+			});
+		//	}
 		});
 
 		$scope.$watch(function(){

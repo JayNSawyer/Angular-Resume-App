@@ -51,15 +51,22 @@ angular.module('resume.shared')
 				};
 			};
 
-			var emitAlert = function(obj){
-				if(!obj.event){
+
+			var emitAlert = function(event){
+				var alert;
+				var alertCollection;
+				if(!event){
 					return false;
 				}
 				return fetchAlerts().then(function(alertCollection){
-					var alertCollection = alertCollection.data;
+					alertCollection = alertCollection.data;
 					for(var i = 0; i < alertCollection.length; i++){
-						if(obj.event == alertCollection[i].event){
-							return alertCollection[i];
+						if(event == alertCollection[i].event){
+							alert = alertCollection[i];
+							$rootScope.$emit(event, {
+								alert: alert
+							});
+							return alert;
 						}
 					}
 				});
