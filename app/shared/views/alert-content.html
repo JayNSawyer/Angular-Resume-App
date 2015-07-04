@@ -1,5 +1,5 @@
 <div class="alert-container" style="width: 100%; height: 100px; margin-top: -20px">
      <div style="height: 100px;" class="alert alert-inner alert-{{myAlert.type}} animated" ng-class="{'flipInY': myAlert.status.show, 'flipOutY': !myAlert.status.show}">{{myAlert.title}} <br> {{myAlert.message}}
-     	<span class="alert animated">{{myAlert.close}}</span>
+     	<span class="alert animated" ng-click="closeAlert()">{{myAlert.close}}</span>
      </div>
 </div>

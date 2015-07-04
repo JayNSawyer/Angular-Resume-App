@@ -12,10 +12,8 @@ angular.module('resume.shared', [])
 			transclude: true,
 			templateUrl: '/shared/views/alert-content.html',
 			link: function(scope, element, attributes, ctrl){
-				var events = attributes.event;
-				var element = element;
-
-				ctrl.initAlert(events, element);
+				ctrl.getElementAndAttribute(attributes.event, element);
+				ctrl.initAlert();
 			} 
 		};
 	}])
