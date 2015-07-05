@@ -45,6 +45,8 @@ angular.module('resume.auth')
 				var token = getToken();
 				if(token){
 					return true;
+				} else {
+					return false;
 				}
 			};
 

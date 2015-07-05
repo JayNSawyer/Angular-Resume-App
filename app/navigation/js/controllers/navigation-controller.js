@@ -28,7 +28,6 @@ angular.module('resume.navigation').controller('NavigationCtrl', [
 		vm.logout = function(){
 			
 			LogoutService.logout().then(function(data){
-
 				AlertService.emitAlert('user-logged-out').then(function(alert){
 					vm.currentUser = '';
 					$location.path( "/main" );
@@ -39,10 +38,11 @@ angular.module('resume.navigation').controller('NavigationCtrl', [
 		vm.currentUser;
 		
 		$scope.$onRootScope('user-logged-in', function(event, msg){
-			CurrentUserService.init().then(function(currentUser){
+			var currentUser = CurrentUserService.getCurrentUser();
+			if(currentUser){
 				vm.currentUser = currentUser;
-			});
-		//	}
+				console.log(vm.currentUser);
+			}
 		});
 
 		$scope.$watch(function(){

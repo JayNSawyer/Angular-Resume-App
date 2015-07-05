@@ -35,7 +35,7 @@ angular.module('resume.user')
 					currentUser.username = payload.username;
 					currentUser.loggedIn = true;
 
-					deferred.resolve(currentUser);
+					deferred.resolve();
 				} else {
 					deferred.reject({message: 'there was an error retrieving the current user!'});
 				}
@@ -43,8 +43,17 @@ angular.module('resume.user')
 				return deferred.promise;
 			};
 
+			var getCurrentUser = function(){
+				if (currentUser.loggedIn){
+					return currentUser;
+				} else {
+					return false;
+				}
+			};
+
 			var CurrentUserService = {
-				init: init
+				init: init,
+				getCurrentUser: getCurrentUser
 			};
 
 			return CurrentUserService;
