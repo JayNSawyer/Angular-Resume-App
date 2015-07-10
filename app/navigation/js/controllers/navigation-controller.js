@@ -10,6 +10,7 @@ angular.module('resume.navigation').controller('NavigationCtrl', [
 		var LogoutService = $injector.get('LogoutService');
 		var CurrentUserService = $injector.get('CurrentUserService');
 		var AlertService = $injector.get('AlertService');
+		var AuthService = $injector.get('AuthService');
 		var $location = $injector.get('$location');
 		var vm = this;
 
@@ -25,6 +26,18 @@ angular.module('resume.navigation').controller('NavigationCtrl', [
 			}
 		};
 
+		var init = function(){
+			var currentUser;
+
+			currentUser = CurrentUserService.getCurrentUser();
+			if (currentUser){
+				vm.currentUser = currentUser;
+				console.log(currentUser);
+			} else {
+				vm.currentUser = null;
+			}
+		};
+
 		vm.logout = function(){
 			
 			LogoutService.logout().then(function(data){
@@ -35,14 +48,14 @@ angular.module('resume.navigation').controller('NavigationCtrl', [
 			});
 		};
 
-		vm.currentUser;
+
+		init();
+
 		
 		$scope.$onRootScope('user-logged-in', function(event, msg){
-			var currentUser = CurrentUserService.getCurrentUser();
-			if(currentUser){
+			CurrentUserService.init().then(function(currentUser){
 				vm.currentUser = currentUser;
-				console.log(vm.currentUser);
-			}
+			});
 		});
 
 		$scope.$watch(function(){

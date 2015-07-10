@@ -5,7 +5,6 @@ angular.module('resume.auth')
 		'$injector',
 		function ($injector){
 			var $rootScope = $injector.get('$rootScope'),
-				$http = $injector.get('$http'),
 				$window = $injector.get('$window'),
 				DecodeTokenService = $injector.get('DecodeTokenService');
 
