@@ -18,6 +18,7 @@ angular.module('resume.shared').controller('AlertCtrl', [
 	//	vm.close = true;
 		vm.close = true;
 
+
 		$scope.closeAlert = function(){
 			$scope.myAlert.status.show = null;
 			if(vm.close === false){
@@ -34,9 +35,10 @@ angular.module('resume.shared').controller('AlertCtrl', [
 				vm.element.css('zIndex', 1);
 				vm.event = undefined;
 				return;
-			}, 10);
+			}, 100);
 			timerClose.then(function(){
 				console.log('timer has resolved');
+				vm.resetAlertContainerDisplay();
 			});
 		};
 
@@ -44,13 +46,21 @@ angular.module('resume.shared').controller('AlertCtrl', [
 			vm.element = element;
 		};
 
+		vm.resetAlertContainerDisplay = function(){
+			$timeout(function(){
+				vm.element.css('display', 'none');
+			}, 1000);
+		}
+
 		vm.initAlert = function(){
 			$scope.$watch('alertCtrl.event', function(newEvent, oldEvent){
 				if(newEvent !== oldEvent){
 					if (vm.event){
+						console.log(vm.element);
 						AlertService.getAlert(newEvent).then(function(alert){
 							vm.close = false;
 							timerOpen = $timeout(function(){
+									vm.element.css('display', 'block');
 									vm.element.css('zIndex', 2147483647);
 									$scope.myAlert = alert;
 									$scope.myAlert.close = 'X';

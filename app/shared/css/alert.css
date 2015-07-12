@@ -1,6 +1,7 @@
 .alert-container {
     z-index: 1;
     position: fixed;
+    display: none;
 }
 
 .alert-container {

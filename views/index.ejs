@@ -52,9 +52,6 @@
 
   </head>
   <body ng-controller="AppCtrl as appCtrl" ng-cloak>
-  <!--   <div class="alert-container" style="width: 100%; height: 100px; position:absolute; margin-top: 10px">
-         <div style="background-color: green; width: 200px; height: 100px; color: white;" class="alert alert-inner container alert-{{appCtrl.myAlert.type}} animated" ng-class="{'flipInY': appCtrl.myAlert.show, 'flipOutY': !appCtrl.myAlert.show, 'alert-hidden': !appCtrl.myAlert.displayed}"><strong>{{appCtrl.myAlert.title}}</strong> {{appCtrl.myAlert.message}}</div>
-    </div> -->
     <div ng-include="'/shared/views/partials/alerts.html'"></div>
 
     <!-- Navigation -->
