@@ -49,5 +49,15 @@
 			"displayed": true,
 			"show": true
 		}
+	},
+	{
+		"type": "error",
+		"event": "user-login-failure",
+		"title": "Hey..",
+		"message": "Invalid username or password!",
+		"status": {
+			"displayed": true,
+			"show": true
+		}
 	}
 ]

@@ -9,12 +9,13 @@ passport.use(new LocalStrategy(
 		User.findOne({username: username}, function(error, user){
 			if (error){ return done(error); }
 			if (!user){
-				return done(null, false, { message: 'Wrong username!' });
+				return done(null, false);
 			}
-			if (!user.validatePassword(password)){
-				return done(null, false, { message: 'Wrong password!' });
+			if( user.validatePassword(password, user.salt) ){
+				return done(null, user);
+			} else {
+				return done(null, false);
 			}
-			return done(null, user);
 		});
 	}
 ));

@@ -13,6 +13,7 @@ angular.module('resume.shared').controller('AppCtrl', [
 
 		var vm = this;	
 
+
 		$scope.greeting = 'Welcome to the Resume App!';
 
 		$scope.closeAlert = function(){

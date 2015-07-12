@@ -14,7 +14,7 @@ angular.module('resume.logout')
 			var self = this;
 			var logout = function(){
 				var deferred = $q.defer();
-				deferred.resolve( AuthService.removeToken() );
+				deferred.resolve(AuthService.removeToken());
 				return deferred.promise;
 			};
 

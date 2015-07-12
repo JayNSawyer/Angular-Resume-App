@@ -28,7 +28,7 @@ router.get('/', function(req, res, next) {
 });
 
 router.post('/login', function(req, res, next){
-	if(!req.body.username){
+	if(!req.body.username || !req.body.password){
 		return res.status(400).json({message: 'an error occurred!'});
 	}
 
@@ -38,7 +38,7 @@ router.post('/login', function(req, res, next){
 		if(user){
 			return res.json({token: user.generateAuthToken() });
 		} else {
-			return res.status(401).json({message: 'An error occurred while attempting to retrieve user'});
+			return res.status(401).json({message: 'No user found or your password is incorrect'});
 		}
 	})(req, res, next);
 });

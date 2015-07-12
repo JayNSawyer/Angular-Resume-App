@@ -1,17 +1,15 @@
 'use strict';
 
 angular.module('resume.auth')
-	.factory('RequestTokenService', [
+	.factory('AuthInterceptorService', [
 		'$injector',
 		function ($injector){
 			var	$q = $injector.get('$q'),
+				$location = $injector.get('$location'),
 				AuthService = $injector.get('AuthService'),
 				CurrentUserService = $injector.get('CurrentUserService');
 
-			var self = this;
-			var currentUser;
 			var token;
-			var status;
 
 			var	request = function(config){
 				token = AuthService.getToken();
@@ -21,16 +19,19 @@ angular.module('resume.auth')
 					});
 				}
 				return $q.when(config);
-			}	
+			};
+
+			var responseError = function(rejection){
+				if (rejection.status === 403){
+					$location.path('login');
+				}
+				return $q.reject(rejection);
+			};	
 
 			return {
-				request: request
+				request: request,
+				responseError: responseError
 			}
 		}
 
-	]).config([
-	'$httpProvider',
-	function ($httpProvider) {
-		$httpProvider.interceptors.push('RequestTokenService');
-	}
-	]);	;
+	]);

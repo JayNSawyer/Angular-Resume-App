@@ -1,3 +1,7 @@
-<alert event="user-logged-in"></alert>
-<alert event="user-logged-out"></alert>
-<alert event="click-me"></alert>
+<div ng-controller="AlertParentCtrl as alertParentCtrl"> 
+	<alert event="alertParentCtrl.event"></alert>
+<!-- <alert event="user-logged-out"></alert>
+<alert event="user-login-failure"></alert> -->
+</div>
+
+

@@ -15,20 +15,18 @@ angular.module('resume.login').controller('LoginCtrl', [
 
 		vm.user = {};
 
-		/* click me test */
-		vm.clickMe = function(){
-			AlertService.emitAlert('click-me');
-		};
 		/* end test */
 
 		vm.submit = function(){
 			LoginService.login(vm.user).then(function(response){
+				console.log(response);
 				AuthService.saveToken(response.data.token);
 				AlertService.emitAlert('user-logged-in');
-			}, function(response){
-				console.log(response.data);
-			}).then(function(response){
 				$state.go('main');
+			}, function(response){
+				console.log('the failure: ');
+				console.log(response.data.message);
+				AlertService.emitAlert('user-login-failure');
 			});
 		};
 

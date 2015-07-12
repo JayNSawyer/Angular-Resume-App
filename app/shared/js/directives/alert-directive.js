@@ -8,11 +8,12 @@ angular.module('resume.shared', [])
 			},
 			restrict: 'E',
 			controller: 'AlertCtrl',
+			controllerAs: 'alertCtrl',
+			bindToController: true,
 			replace: true,
-			transclude: true,
 			templateUrl: '/shared/views/alert-content.html',
 			link: function(scope, element, attributes, ctrl){
-				ctrl.getElementAndAttribute(attributes.event, element);
+				ctrl.getElement(element);
 				ctrl.initAlert();
 			} 
 		};

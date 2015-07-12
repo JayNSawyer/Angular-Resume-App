@@ -17,6 +17,11 @@
 	color: black;
 }
 
+.alert-error {
+    background-color: #d7a627;
+    color: #fff;
+}
+
 
 .alert, .alert .close-alert {
 	max-width: 200px;

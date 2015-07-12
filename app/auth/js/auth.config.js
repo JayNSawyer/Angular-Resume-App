@@ -4,6 +4,6 @@
 angular.module('resume.auth').config([
 	'$httpProvider',
 	function($httpProvider){
-		$httpProvider.interceptors.push('RequestTokenService');
+		$httpProvider.interceptors.push('AuthInterceptorService');
 	}
 ]);	

@@ -10,18 +10,17 @@ angular.module('resume.auth')
 
 			var self = this;	
 
-			var cachedToken;
+		//	var cachedToken;
 
 			var saveToken = function(token){
-				cachedToken = token;
+		//		cachedToken = token;
 				$window.localStorage['userToken'] = token;
 			};
 
 			var getToken = function(){
-				if(!cachedToken){
-					cachedToken = $window.localStorage['userToken'];
-				}
-				return cachedToken;
+		//		if(!cachedToken){
+					return $window.localStorage['userToken'];
+			//	return cachedToken;
 			};
 
 			var removeToken = function(){

@@ -41,14 +41,21 @@ angular.module('resume.shared')
 				}).error(errorCB);
 			};
 
-			var getAlert = function(type, title, message){
-				return {
-					displayed: true,
-					show: true,
-					type: type,
-					myMessage: message,
-					title: title
-				};
+			var getAlert = function(event){
+				var alert;
+				var alertCollection;
+				if(!event){
+					return false;
+				}
+				return fetchAlerts().then(function(alertCollection){
+					alertCollection = alertCollection.data;
+					for(var i = 0; i < alertCollection.length; i++){
+						if(event == alertCollection[i].event){
+							alert = alertCollection[i];
+							return alert;
+						}
+					}
+				});
 			};
 
 

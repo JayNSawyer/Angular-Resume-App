@@ -1,4 +1,5 @@
 var mongoose = require('mongoose');
+var crypto = require('crypto');
 var Hasher = require('../services/hash');
 var jwt = require('jsonwebtoken');
 var secrets = require('../config/secrets.js');
@@ -44,9 +45,11 @@ userModel.methods.setPassword = function(password){
 	this.passwordHash = Hasher.setHash(password, this.salt);
 };
 
-userModel.methods.validatePassword = function(password){
-	var passwordHash = Hasher.getHash(password, this.salt);
-	return this.passwordHash = passwordHash;
+userModel.methods.validatePassword = function(password, salt){
+	var compareHash = Hasher.createHash(password, salt);
+	if (compareHash === this.passwordHash){
+		return true;
+	}
 };
 
 userModel.methods.generateAuthToken = function(days){
