@@ -12,11 +12,11 @@ angular.module('resume.auth')
 			var token;
 
 			var	request = function(config){
+				config.headers = config.headers || {};
 				token = AuthService.getToken();
 				if(token){
-					CurrentUserService.init().then(function(){
-						config.headers.Authorization = 'Bearer ' + token;
-					});
+					config.headers.Authorization = 'Bearer ' + token;
+					CurrentUserService.init();
 				}
 				return $q.when(config);
 			};

@@ -12,6 +12,7 @@ angular.module('resume.navigation').controller('NavigationCtrl', [
 		var AlertService = $injector.get('AlertService');
 		var AuthService = $injector.get('AuthService');
 		var $location = $injector.get('$location');
+		var $http = $injector.get('$http');
 		var vm = this;
 
 
@@ -53,9 +54,21 @@ angular.module('resume.navigation').controller('NavigationCtrl', [
 
 		
 		$scope.$onRootScope('user-logged-in', function(event, msg){
-			CurrentUserService.init().then(function(currentUser){
-				vm.currentUser = currentUser;
-			});
+				var currentUser = CurrentUserService.getCurrentUser();
+				if (!currentUser){
+					vm.currentUser = null;
+				} else {
+					vm.currentUser = currentUser;
+				}
+		});
+
+		$scope.$onRootScope('user-registration-success', function(event, msg){
+				var currentUser = CurrentUserService.getCurrentUser();
+				if (!currentUser){
+					vm.currentUser = null;
+				} else {
+					vm.currentUser = currentUser;
+				}
 		});
 
 		$scope.$watch(function(){

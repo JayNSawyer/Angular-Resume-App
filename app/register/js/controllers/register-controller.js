@@ -17,14 +17,13 @@ angular.module('resume.register').controller('RegisterCtrl', [
 		vm.submit = function(){
 			RegisterService.register(vm.user).then(function(response){
 				console.log(response);
-				var data = response.data;
-				var token = data.token;
-				AuthService.saveToken(token);
-
-			}, function(response){
-				console.log(response.data);
-			}).then(function(response){
+				AuthService.saveToken(response.data.token);
+				AlertService.emitAlert('user-registration-success');
 				$state.go('main');
+			}, function(response){
+				console.log('the failure: ');
+				console.log(response.data.message);
+				AlertService.emitAlert('user-registration-failure');
 			});
 		};
 	}

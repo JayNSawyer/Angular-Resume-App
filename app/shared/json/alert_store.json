@@ -12,7 +12,7 @@
 	},
 	{
 		"type": "success",
-		"event": "user-registered",
+		"event": "user-registration-success",
 		"title": "Hey..",
 		"message": "You have succesfully registered!",
 		"status": {
@@ -55,6 +55,16 @@
 		"event": "user-login-failure",
 		"title": "Hey..",
 		"message": "Invalid username or password!",
+		"status": {
+			"displayed": true,
+			"show": true
+		}
+	},
+	{
+		"type": "error",
+		"event": "user-registration-failure",
+		"title": "Hey..",
+		"message": "One or more invalid fields!",
 		"status": {
 			"displayed": true,
 			"show": true

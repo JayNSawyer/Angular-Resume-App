@@ -15,7 +15,6 @@ angular.module('resume.shared').controller('AlertCtrl', [
 
 		vm.element = '';
 
-	//	vm.close = true;
 		vm.close = true;
 
 

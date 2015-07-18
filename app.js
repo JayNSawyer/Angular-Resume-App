@@ -6,6 +6,7 @@ var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
 var passport = require('passport');
 
+
 require('./models/userModel');
 require('./config/passport');
 
@@ -27,6 +28,7 @@ app.use(express.static(path.join(__dirname, 'app')));
 app.use(express.static(path.join(__dirname, 'vendor')));
 app.use(passport.initialize());
 app.use('/', routes);
+
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {

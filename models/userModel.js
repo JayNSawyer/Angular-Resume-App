@@ -4,6 +4,8 @@ var Hasher = require('../services/hash');
 var jwt = require('jsonwebtoken');
 var secrets = require('../config/secrets.js');
 var moment = require('moment');
+var Auth = require('../services/authenticate');
+
 
 
 
@@ -40,11 +42,6 @@ userModel.methods.toJSON = function(){
 	return obj;
 };
 
-userModel.methods.setPassword = function(password){
-	this.salt = Hasher.setSalt();
-	this.passwordHash = Hasher.setHash(password, this.salt);
-};
-
 userModel.methods.validatePassword = function(password, salt){
 	var compareHash = Hasher.createHash(password, salt);
 	if (compareHash === this.passwordHash){
@@ -53,22 +50,11 @@ userModel.methods.validatePassword = function(password, salt){
 };
 
 userModel.methods.generateAuthToken = function(days){
-	var expire;
-
-	if(!days){
-		expire = moment().add('days', 30).valueOf(); //default to 30 days
+	if(days){
+		return Auth.generateAuthToken(this, days);
 	} else {
-		expire = moment().add('days', days).valueOf();
+		return Auth.generateAuthToken(this, null);
 	}
-
-	return jwt.sign({
-		_id: this._id,
-		firstname: this.firstname,
-		lastname: this.lastname,
-		email: this.email,
-		username: this.username,
-		expiration: expire
-	}, secrets.SECRET);
 };
 
 

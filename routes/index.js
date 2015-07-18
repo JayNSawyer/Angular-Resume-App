@@ -1,19 +1,17 @@
 var express = require('express');
-var authToken = require('../services/authToken');
 var secrets = require('../config/secrets.js');
-
+var jwt = require('express-jwt');
 var mongoose = require('mongoose');
 var DB = require('../db/collections');
 var router = express.Router();
 
 var register = require('../services/register');
-var validation = require('../services/validation');
+var Auth = require('../services/authenticate');
 var passport = require('passport');
 
+var auth = jwt({secret: secrets.SECRET});
+
 var User = DB.User;
-
-
-/* GET home page. */
 
 
 /* Template */
@@ -27,10 +25,7 @@ router.get('/', function(req, res, next) {
 	});
 });
 
-router.post('/login', function(req, res, next){
-	if(!req.body.username || !req.body.password){
-		return res.status(400).json({message: 'an error occurred!'});
-	}
+router.post('/login', Auth.authenticate, function(req, res, next){
 
 	passport.authenticate('local', function(error, user){
 		if(error) next(error); 
@@ -43,27 +38,28 @@ router.post('/login', function(req, res, next){
 	})(req, res, next);
 });
 
-router.post('/register', function(req, res, next){
+router.post('/register', Auth.authenticate, function(req, res, next){
 	var user;
+	var body = req.body;
 
-	if(!req.body.username){
+	if(!body.username || !body.password){
 		return res.status(400).json({message: 'an error occurred!'});
 	}
 
-	if(req.body){
-		user = register.registerUser(req.body);
-		user.save(function (error){
-			if (error) {console.log('an error'); return next(error); }
-			return res.json({token: user.generateAuthToken() });
-		});
-	}
+	user = register.createUser(body);
+	user.save(function (err){
+		if (err){
+			return next(err);
+		}
+		return res.json({ token: user.generateAuthToken() });
+	});
 
 });
 
 
 /* JSON API */
 
-router.get('/api/users', function(req, res, next){
+router.get('/api/users', auth, function(req, res, next){
 	User.find(function(err, users){
 		if(err){
 			console.log(err);
@@ -71,7 +67,6 @@ router.get('/api/users', function(req, res, next){
 			res.json(users);
 		}
 	});
- 	//res.json(users);
 });
 
 

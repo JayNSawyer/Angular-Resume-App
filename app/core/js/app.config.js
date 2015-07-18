@@ -30,6 +30,7 @@ angular.module('resume').config([
 				url: '/main',
 				templateUrl: '/main/views/index.html',
 				controller: 'MainCtrl',
+				controllerAs: 'mainCtrl',
 				onEnter: ['$location', 'AuthService', function($location, AuthService){
 					if (AuthService.isAuthenticated()){
 						var payload = AuthService.getPayload();
