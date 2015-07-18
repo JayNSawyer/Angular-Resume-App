@@ -64,7 +64,7 @@
 		"type": "error",
 		"event": "user-registration-failure",
 		"title": "Hey..",
-		"message": "One or more invalid fields!",
+		"message": "Registration failed. Please try again!",
 		"status": {
 			"displayed": true,
 			"show": true

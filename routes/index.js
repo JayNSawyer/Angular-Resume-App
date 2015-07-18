@@ -25,9 +25,8 @@ router.get('/', function(req, res, next) {
 	});
 });
 
-router.post('/login', Auth.authenticate, function(req, res, next){
-
-	passport.authenticate('local', function(error, user){
+router.post('/login', function(req, res, next){
+	passport.authenticate('local-login', function(error, user){
 		if(error) next(error); 
 
 		if(user){
@@ -38,21 +37,41 @@ router.post('/login', Auth.authenticate, function(req, res, next){
 	})(req, res, next);
 });
 
-router.post('/register', Auth.authenticate, function(req, res, next){
-	var user;
-	var body = req.body;
+router.post('/register', function(req, res, next){
+	passport.authenticate('local-register', function(error, user){
+		if(error) next(error); 
 
-	if(!body.username || !body.password){
-		return res.status(400).json({message: 'an error occurred!'});
-	}
-
-	user = register.createUser(body);
-	user.save(function (err){
-		if (err){
-			return next(err);
+		if(user){
+			return res.json({token: user.generateAuthToken() });
+		} else {
+			return res.status(401).json({message: 'Registration failed!'});
 		}
-		return res.json({ token: user.generateAuthToken() });
-	});
+	})(req, res, next);
+	// var user;
+	// var body = req.body;
+	// var search = {
+	// 	email: body.email
+	// };
+
+	// if(!body.username || !body.password){
+	// 	return res.status(400).json({message: 'an error occurred!'});
+	// }
+
+	//Ensure user doesn't already exist!
+	// User.findOne(search, function (error, user){
+	// 	if (err) return next(error);
+	// 	if (user) {
+	// 		return res.json({message: 'This email already exists!'});
+	// 	}
+	// });
+
+	// user = register.createUser(body);
+	// user.save(function (err){
+	// 	if (err){
+	// 		return next(err);
+	// 	}
+	// 	return res.json({ token: user.generateAuthToken() });
+	// });
 
 });
 

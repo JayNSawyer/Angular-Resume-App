@@ -20,11 +20,11 @@ angular.module('resume.register').controller('RegisterCtrl', [
 				AuthService.saveToken(response.data.token);
 				AlertService.emitAlert('user-registration-success');
 				$state.go('main');
-			}, function(response){
-				console.log('the failure: ');
-				console.log(response.data.message);
+			}, function(error){
 				AlertService.emitAlert('user-registration-failure');
 			});
 		};
+
+
 	}
 ]);
