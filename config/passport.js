@@ -12,9 +12,7 @@ var loginStrategy = new LocalStrategy(
 		User.findOne({username: username}, function(error, user){
 			if (error){ return done(error); }
 			if (!user){
-				return done(null, false, {
-					message: 'Incorrect email or password'
-				});
+				return done(null, false);
 			}
 			if( user.validatePassword(password, user.salt) ){
 				return done(null, user);

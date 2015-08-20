@@ -4,6 +4,8 @@ var jwt = require('express-jwt');
 var mongoose = require('mongoose');
 var DB = require('../db/collections');
 var router = express.Router();
+var Hasher = require('../services/hash');
+var _ = require('lodash');
 
 var register = require('../services/register');
 var Auth = require('../services/authenticate');
@@ -75,10 +77,40 @@ router.post('/register', function(req, res, next){
 
 });
 
+router.post('/reset-password', function(req, res, next){
+	//TODO: (1) once the functionality is working, the user will have to reset her password from her email account!
+	//TODO: (2) extract the hashing and salting into an external service...this should NOT be performed in the router!
+	var email = req.body.email;
+	var password = req.body.password;
+	var salt;
+	var hash;
+
+	var search = {
+		email: email
+	};
+
+	User.findOne(search, function(error, user){
+		if (error){ return next(error); }
+
+		if (user){
+			salt = user.getSalt();
+			hash = Hasher.createHash(password, salt);
+			user.passwordHash = hash;
+			user.save(function (error){
+				if (error){
+					return next(error);
+				}
+				return res.json(user);
+			});
+		}
+	});
+
+});
+
 
 /* JSON API */
 
-router.get('/api/users', auth, function(req, res, next){
+router.get('/api/users', function(req, res, next){
 	User.find(function(err, users){
 		if(err){
 			console.log(err);

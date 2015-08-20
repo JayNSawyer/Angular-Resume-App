@@ -42,11 +42,16 @@ userModel.methods.toJSON = function(){
 	return obj;
 };
 
+
 userModel.methods.validatePassword = function(password, salt){
 	var compareHash = Hasher.createHash(password, salt);
 	if (compareHash === this.passwordHash){
 		return true;
 	}
+};
+
+userModel.methods.getSalt = function(){
+	return this.salt;
 };
 
 userModel.methods.generateAuthToken = function(days){

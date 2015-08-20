@@ -15,6 +15,10 @@ angular.module('resume.login').controller('LoginCtrl', [
 
 		vm.user = {};
 
+		vm.forgotPassword = false;
+
+		$rootScope.message = 'Enter Your Info Below To Log In!';
+
 		/* end test */
 
 		vm.submit = function(){
@@ -28,6 +32,10 @@ angular.module('resume.login').controller('LoginCtrl', [
 				console.log(response.data.message);
 				AlertService.emitAlert('user-login-failure');
 			});
+		};
+
+		vm.forgotPasswordSubmit = function(){
+			console.log(vm.user);
 		};
 
 	}

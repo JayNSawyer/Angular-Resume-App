@@ -14,8 +14,18 @@ angular.module('resume').config([
 					if (AuthService.isAuthenticated()){
 						$location.path('main');
 					}
+					$location.path('/login/signin');
 				}]
 			})
+				.state('login.signIn', {
+					url: '/signin',
+					templateUrl: '/login/views/signin.html'
+				})
+				.state('login.forgotPassword', {
+					url: '/password/new',
+					templateUrl: '/login/views/forgot-password.html',
+					controller: 'ForgotPasswordCtrl'
+				})
 			.state('register', {
 				url: '/register',
 				templateUrl: '/register/views/index.html',
