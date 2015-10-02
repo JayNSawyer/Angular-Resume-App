@@ -1,37 +1,38 @@
-'use strict';
+(function(){
+	'use strict';
 
-angular.module('resume.auth')
-	.factory('AuthInterceptorService', [
-		'$injector',
-		function ($injector){
-			var	$q = $injector.get('$q'),
-				$location = $injector.get('$location'),
-				AuthService = $injector.get('AuthService'),
-				CurrentUserService = $injector.get('CurrentUserService');
+	angular
+		.module('resume.auth')
+		.factory('AuthInterceptorService', AuthInterceptorService);
 
-			var token;
+	AuthInterceptorService.$inject = ['$q', '$location', 'AuthService', 'CurrentUserService'];
 
-			var	request = function(config){
-				config.headers = config.headers || {};
-				token = AuthService.getToken();
-				if(token){
-					config.headers.Authorization = 'Bearer ' + token;
-					CurrentUserService.init();
-				}
-				return $q.when(config);
-			};
+	function AuthInterceptorService($q, $location, AuthService, CurrentUserService){
+	
+		var token;
 
-			var responseError = function(rejection){
-				if (rejection.status === 403){
-					$location.path('login');
-				}
-				return $q.reject(rejection);
-			};	
-
-			return {
-				request: request,
-				responseError: responseError
+		var	request = function(config){
+			config.headers = config.headers || {};
+			token = AuthService.getToken();
+			if(token){
+				config.headers.Authorization = 'Bearer ' + token;
+				CurrentUserService.init();
 			}
-		}
+			return $q.when(config);
+		};
 
-	]);
+		var responseError = function(rejection){
+			if (rejection.status === 403){
+				$location.path('login');
+			}
+			return $q.reject(rejection);
+		};	
+
+		return {
+			request: request,
+			responseError: responseError
+		};
+
+	}
+
+})();

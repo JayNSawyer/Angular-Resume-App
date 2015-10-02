@@ -1,62 +1,48 @@
-'use strict';
+(function(){
+	'use strict';
 
-angular.module('resume.auth')
-	.factory('AuthService', [
-		'$injector',
-		function ($injector){
-			var $rootScope = $injector.get('$rootScope'),
-				$window = $injector.get('$window'),
-				DecodeTokenService = $injector.get('DecodeTokenService');
+	angular
+		.module('resume.auth')
+		.factory('AuthService', AuthService);
 
-			var self = this;	
+	AuthService.$inject = ['$window', 'DecodeTokenService'];
 
-		//	var cachedToken;
+	function AuthService($window, DecodeTokenService){
 
-			var saveToken = function(token){
-		//		cachedToken = token;
-				$window.localStorage['userToken'] = token;
-			};
+		var saveToken = function(token){
+			$window.localStorage.userToken = token;
+		};
 
-			var getToken = function(){
-		//		if(!cachedToken){
-					return $window.localStorage['userToken'];
-			//	return cachedToken;
-			};
+		var getToken = function(){
+			return $window.localStorage.userToken;
+		};
 
-			var removeToken = function(){
-				$window.localStorage.clear();
-			};
+		var removeToken = function(){
+			$window.localStorage.clear();
+		};
 
-			var getPayload = function(){
-				var token = getToken();
-				var payload;
+		var getPayload = function(){
+			var token = getToken();
+			var payload;
 
-				if(!token){
-					return false;
-				} else {
-					payload = DecodeTokenService.decodeToken(token);
-					return payload;
-				}	
+			if(!token){
+				return false;
+			} else {
+				payload = DecodeTokenService.decodeToken(token);
+				return payload;
 			}
+		};
 
-			var isAuthenticated = function(){
-				var token = getToken();
-				if(token){
-					return true;
-				} else {
-					return false;
-				}
-			};
+		var isAuthenticated = function(){
+			return getToken();
+		};
 
-			var AuthService = {
-				saveToken: saveToken,
-				getToken: getToken,
-				isAuthenticated: isAuthenticated,
-				getPayload: getPayload,
-				removeToken: removeToken
-			};
-
-			return AuthService;
-		}
-
-	]);
+		return {
+			saveToken: saveToken,
+			getToken: getToken,
+			isAuthenticated: isAuthenticated,
+			getPayload: getPayload,
+			removeToken: removeToken
+		};
+	}
+})();
