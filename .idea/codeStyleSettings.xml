@@ -3,9 +3,12 @@
   <component name="ProjectCodeStyleSettingsManager">
     <option name="PER_PROJECT_SETTINGS">
       <value>
+<<<<<<< HEAD
         <XML>
           <option name="XML_LEGACY_SETTINGS_IMPORTED" value="true" />
         </XML>
+=======
+>>>>>>> 976173fda1e6127eff1ae0296862258b059e578f
         <codeStyleSettings language="JavaScript">
           <indentOptions>
             <option name="USE_TAB_CHARACTER" value="true" />
