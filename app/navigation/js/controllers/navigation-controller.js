@@ -27,6 +27,7 @@ angular.module('resume.navigation').controller('NavigationCtrl', [
 			}
 		};
 
+		/* NOTE: extract CurrentUserService functionality to top-level controller */
 		var init = function(){
 			var currentUser;
 

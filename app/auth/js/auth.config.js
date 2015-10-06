@@ -1,9 +1,13 @@
-'use strict';
+(function() {
 
+    'use strict';
 
-angular.module('resume.auth').config([
-	'$httpProvider',
-	function($httpProvider){
-		$httpProvider.interceptors.push('AuthInterceptorService');
-	}
-]);	
+	angular.module('resume.auth').config([
+		'$httpProvider',
+		function($httpProvider) {
+			$httpProvider.interceptors.push('AuthInterceptorService');
+		}
+	]);
+	console.log('true');
+
+})();

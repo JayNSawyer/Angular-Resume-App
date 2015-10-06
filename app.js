@@ -7,7 +7,6 @@ var bodyParser = require('body-parser');
 var passport = require('passport');
 var mailer = require('express-mailer'); //we'll use this mailer later
 
-
 require('./models/userModel');
 require('./config/passport');
 
@@ -23,13 +22,12 @@ app.set('view engine', 'ejs');
 //app.use(favicon(__dirname + '/public/favicon.ico'));
 app.use(logger('dev'));
 app.use(bodyParser.json());
-app.use(bodyParser.urlencoded({ extended: false }));
+app.use(bodyParser.urlencoded({extended: false}));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'app')));
 app.use(express.static(path.join(__dirname, 'vendor')));
 app.use(passport.initialize());
 app.use('/', routes);
-
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
@@ -61,14 +59,5 @@ app.use(function(err, req, res, next) {
     error: {}
   });
 });
-
-
-// var debug = require('debug')('resume-app:server');
-// var http = require('http');
-
-// app.listen(3000, function(){
-//   console.log('Listening....');
-// })
-
 
 module.exports = app;

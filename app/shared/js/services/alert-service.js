@@ -38,6 +38,7 @@ angular.module('resume.shared')
 			var fetchAlerts = function(){
 				return $http.get('/shared/json/alert_store.json').success(function(alertCollection){
 					return alertCollection;
+					//TODO: maybe cache the alertCollection, so we don't have to keep making $http calls?
 				}).error(errorCB);
 			};
 

@@ -1,4 +1,5 @@
 # Ignore native extensions in the node_modules folder (things changed by npm rebuild)
+node_modules/
 node_modules/**/*.node
 node_modules/**/*.o
 node_modules/**/*.a
@@ -11,3 +12,5 @@ node_modules/**/**/build/Makefile
 npm-debug.log
 helpers/hash.js
 config/secrets.js
+.idea/
+

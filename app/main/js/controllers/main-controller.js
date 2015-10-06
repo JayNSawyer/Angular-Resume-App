@@ -7,11 +7,9 @@ angular.module('resume.main').controller('MainCtrl', [
 		var $rootScope = $injector.get('$rootScope'),
 			UserService = $injector.get('UserService');
 
-
 			UserService.getUsers().then(function(users){
 				$scope.users = users;
 			});
 	}
-
 
 ]);
