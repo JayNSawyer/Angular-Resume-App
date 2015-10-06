@@ -1,7 +1,7 @@
 (function() {
-	'use strict';
+    'use strict';
 
-	var gulp = require('gulp');
+    var gulp = require('gulp');
     var args = require('yargs').argv;
     var config = require('./gulp.config')();
 

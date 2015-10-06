@@ -1,4 +1,4 @@
-(function(){
+(function() {
 	'use strict';
 
 	angular
@@ -7,25 +7,25 @@
 
 	AuthService.$inject = ['$window', 'DecodeTokenService'];
 
-	function AuthService($window, DecodeTokenService){
+	function AuthService($window, DecodeTokenService) {
 
-		var saveToken = function(token){
+		var saveToken = function(token) {
 			$window.localStorage.userToken = token;
 		};
 
-		var getToken = function(){
+		var getToken = function() {
 			return $window.localStorage.userToken;
 		};
 
-		var removeToken = function(){
+		var removeToken = function() {
 			$window.localStorage.clear();
 		};
 
-		var getPayload = function(){
+		var getPayload = function() {
 			var token = getToken();
 			var payload;
 
-			if(!token){
+			if (!token) {
 				return false;
 			} else {
 				payload = DecodeTokenService.decodeToken(token);
@@ -33,7 +33,7 @@
 			}
 		};
 
-		var isAuthenticated = function(){
+		var isAuthenticated = function() {
 			return getToken();
 		};
 
