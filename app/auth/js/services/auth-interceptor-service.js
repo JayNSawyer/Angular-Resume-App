@@ -1,4 +1,4 @@
-(function(){
+(function() {
 	'use strict';
 
 	angular
@@ -7,26 +7,26 @@
 
 	AuthInterceptorService.$inject = ['$q', '$location', 'AuthService', 'CurrentUserService'];
 
-	function AuthInterceptorService($q, $location, AuthService, CurrentUserService){
-	
+	function AuthInterceptorService($q, $location, AuthService, CurrentUserService) {
+
 		var token;
 
-		var	request = function(config){
+		var	request = function(config) {
 			config.headers = config.headers || {};
 			token = AuthService.getToken();
-			if(token){
+			if (token) {
 				config.headers.Authorization = 'Bearer ' + token;
 				CurrentUserService.init();
 			}
 			return $q.when(config);
 		};
 
-		var responseError = function(rejection){
-			if (rejection.status === 403){
+		var responseError = function(rejection) {
+			if (rejection.status === 403) {
 				$location.path('login');
 			}
 			return $q.reject(rejection);
-		};	
+		};
 
 		return {
 			request: request,
