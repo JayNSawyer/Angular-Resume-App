@@ -11,7 +11,7 @@
 
 		var token;
 
-		var	request = function(config) {
+		var request = function(config) {
 			config.headers = config.headers || {};
 			token = AuthService.getToken();
 			if (token) {
