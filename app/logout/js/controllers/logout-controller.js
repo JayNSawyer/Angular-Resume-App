@@ -1,17 +1,18 @@
-'use strict'
+(function(){
+	'use strict';
 
-angular.module('resume.logout').controller('LogoutCtrl', [
-	'$scope',
-	'$injector',
-	function($scope, $injector){
-		var $rootScope = $injector.get('$rootScope');
-		var $state = $injector.get('$state');
-		var AuthService = $injector.get('AuthService');
-		var LogoutService = $injector.get('LogoutService');
+	angular
+		.module('resume.logout')
+		.controller('LogoutCtrl', LogoutCtrl);
+
+	LogoutCtrl.$inject = ['$scope', '$rootScope', '$state', 'AuthService', 'LogoutService'];	
+
+	function LogoutCtrl($scope, $rootScope, $state, AuthService, LogoutService){
+
 		var vm = this;
 
 		vm.logout = function(){
 			LogoutService.logout();
 		};
 	}
-]);
+})();

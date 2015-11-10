@@ -1,26 +1,26 @@
-'use strict';
+(function(){
+	'use strict';
 
-angular.module('resume.login')
-	.factory('LoginService', [
-		'$injector',
-		function ($injector){
-			var $rootScope = $injector.get('$rootScope'),
-				$http = $injector.get('$http');
+	angular
+		.module('resume.login')
+		.factory('LoginService', LoginService);
 
+	LoginService.$inject = ['$rootScope', '$http'];
 
-			var self = this;
-			var login = function(user){
-				return $http.post('/login', user);
-			};
+	function LoginService ($rootScope, $http) {
 
-			var LoginService = {
-				login: login
-			};
+		var self = this;
 
-			return LoginService;
-		}
+		var login = function(user){
+			return $http.post('/login', user);
+		};
 
-	]);
+		var LoginService = {
+			login: login
+		};
 
+		return LoginService;
 
+	}
+})();
 

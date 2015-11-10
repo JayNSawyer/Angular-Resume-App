@@ -1,15 +1,17 @@
-'use strict'
+(function(){
+	'use strict';
 
-angular.module('resume.main').controller('MainCtrl', [
-	'$scope',
-	'$injector',
-	function($scope, $injector){
-		var $rootScope = $injector.get('$rootScope'),
-			UserService = $injector.get('UserService');
+	angular 
+		.module('resume.main')
+		.controller('MainCtrl', MainCtrl);
 
-			UserService.getUsers().then(function(users){
-				$scope.users = users;
-			});
-	}
+	MainCtrl.$inject = ['$rootScope', '$scope', 'UserService'];
+	
+	function MainCtrl($rootScope, $scope, UserService) {
+		UserService.getUsers().then(function (users) {
+			$scope.users = users;
+		});
+	}	
 
-]);
+})();
+

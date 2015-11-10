@@ -1,15 +1,13 @@
-'use strict'
+(function(){
+	'use strict';
 
-angular.module('resume.login').controller('LoginCtrl', [
-	'$scope',
-	'$injector',
-	function($scope, $injector){
-		var $rootScope = $injector.get('$rootScope');
-		var $state = $injector.get('$state');
-		var AuthService = $injector.get('AuthService');
-		var LoginService = $injector.get('LoginService');
-		var AlertService = $injector.get('AlertService');
-		var $timeout = $injector.get('$timeout');
+	angular
+		.module('resume.login')
+		.controller('LoginCtrl', LoginCtrl);
+
+	LoginCtrl.$inject = ['$scope', '$rootScope', '$state', 'AuthService', 'LoginService', 'AlertService'];	
+
+	function LoginCtrl($scope, $rootScope, $state, AuthService, LoginService, AlertService){
 
 		var vm = this;
 
@@ -18,8 +16,6 @@ angular.module('resume.login').controller('LoginCtrl', [
 		vm.forgotPassword = false;
 
 		$rootScope.message = 'Enter Your Info Below To Log In!';
-
-		/* end test */
 
 		vm.submit = function(){
 			LoginService.login(vm.user).then(function(response){
@@ -37,6 +33,5 @@ angular.module('resume.login').controller('LoginCtrl', [
 		vm.forgotPasswordSubmit = function(){
 			console.log(vm.user);
 		};
-
 	}
-]);
+})();
