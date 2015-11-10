@@ -81,21 +81,21 @@ angular.module('resume.shared')
 			};
 
 			// how to use findAlert 
-			
+
 			/*
-			findAlert({	type: 'success', event: 'click-me'}).then(function(alert){
-				console.log('here is the alert: ');
-				if(!alert){
-					console.log('No results found!');
-				} else {
-					console.log(alert);
-				}
-			}, function(error){
-				console.log('An error occurred: ');
-				console.log(error);
-			});
-			*/
-			
+			 findAlert({	type: 'success', event: 'click-me'}).then(function(alert){
+			 console.log('here is the alert: ');
+			 if(!alert){
+			 console.log('No results found!');
+			 } else {
+			 console.log(alert);
+			 }
+			 }, function(error){
+			 console.log('An error occurred: ');
+			 console.log(error);
+			 });
+			 */
+
 
 			var hideAlert = function(){
 				return {
@@ -116,7 +116,7 @@ angular.module('resume.shared')
 
 			var createAlert = function(type, event, title, message){
 				function throwErr(msg){
-				    throw new Error(msg);
+					throw new Error(msg);
 				}
 				var alert = {};
 				alert.type = type || throwErr('Please specify a type');

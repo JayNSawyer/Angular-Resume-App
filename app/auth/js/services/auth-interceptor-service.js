@@ -16,7 +16,7 @@
 			token = AuthService.getToken();
 			if (token) {
 				config.headers.Authorization = 'Bearer ' + token;
-				CurrentUserService.init();
+				CurrentUserService.init(token);
 			}
 			return $q.when(config);
 		};

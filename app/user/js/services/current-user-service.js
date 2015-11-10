@@ -19,32 +19,38 @@ angular.module('resume.user')
 				loggedIn: false
 			};
 
-			var init = function(){
+			var init = function(token){
 
 				var deferred = $q.defer();
 
-				if(AuthService.isAuthenticated()){
-					
-					var token = AuthService.getToken();
-					var payload = AuthService.getPayload();
-			
-					currentUser.firstname = payload.firstname;
-					currentUser.lastname = payload.lastname;
-					currentUser.email = payload.email;
-					currentUser.username = payload.username;
-					currentUser.loggedIn = true;
-					deferred.resolve(currentUser);
+				if (token) {
+					setCurrentUser(currentUser, function(currentUserSet){
+						deferred.resolve(currentUserSet);
+					});
+				} else if (AuthService.isAuthenticated()){
+					setCurrentUser(currentUser, function(currentUserSet){
+						deferred.resolve(currentUserSet);
+					});
 				} else {
-					deferred.reject({message: 'there was an error retrieving the current user!'});
+					deferred.reject({message: 'there was an error initializing the current user!'});
 				}
 
 				return deferred.promise;
 			};
 
 			var getCurrentUser = function(){
-				if( AuthService.isAuthenticated() ){
-					return currentUser;
-				}
+				return currentUser;
+			};
+
+			var setCurrentUser = function(currentUser, cb){
+				var payload;
+				payload = AuthService.getPayload();
+				currentUser.firstname = payload.firstname;
+				currentUser.lastname = payload.lastname;
+				currentUser.email = payload.email;
+				currentUser.username = payload.username;
+				currentUser.loggedIn = true;
+				cb(currentUser);
 			};
 
 			var CurrentUserService = {

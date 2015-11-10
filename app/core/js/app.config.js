@@ -20,7 +20,12 @@
 				})
 				.state('login.signIn', {
 					url: '/signin',
-					templateUrl: '/login/views/signin.html'
+					templateUrl: '/login/views/signin.html',
+					onEnter: ['$location', 'AuthService', function($location, AuthService) {
+						if (AuthService.isAuthenticated()) {
+							$location.path('main');
+						}
+					}]
 				})
 				.state('login.forgotPassword', {
 					url: '/password/new',
