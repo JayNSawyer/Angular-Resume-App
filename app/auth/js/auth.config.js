@@ -1,11 +1,14 @@
 (function() {
     'use strict';
+
 	angular
 		.module('resume.auth')
-		.config([
-			'$httpProvider',
-			function($httpProvider) {
-				$httpProvider.interceptors.push('AuthInterceptorService');
-			}
-		]);
+		.config(AuthConfig)
+
+	AuthConfig.$inject = ['$httpProvider'];	
+
+	function AuthConfig($httpProvider) {
+		$httpProvider.interceptors.push('AuthInterceptorService');
+	} 		
+
 })();

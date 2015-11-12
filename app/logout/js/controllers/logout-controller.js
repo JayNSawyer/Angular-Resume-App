@@ -11,8 +11,11 @@
 
 		var vm = this;
 
-		vm.logout = function(){
+		vm.logout = logout;
+
+		function logout() {
 			LogoutService.logout();
-		};
+		}
+
 	}
 })();

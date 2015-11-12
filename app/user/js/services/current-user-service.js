@@ -11,38 +11,50 @@ angular.module('resume.user')
 
 			var self = this;	
 
-			var currentUser = {
-				firstname: '',
-				lastname: '',
-				email: '',
-				username: '',
-				loggedIn: false
-			};
+			var currentUser = {};
 
 			var init = function(token){
 
 				var deferred = $q.defer();
 
 				if (token) {
-					setCurrentUser(currentUser, function(currentUserSet){
-						deferred.resolve(currentUserSet);
+					setCurrentUser(function(currentUser){
+						deferred.resolve(currentUser);
 					});
 				} else if (AuthService.isAuthenticated()){
-					setCurrentUser(currentUser, function(currentUserSet){
-						deferred.resolve(currentUserSet);
+					setCurrentUser(function(currentUser){
+						deferred.resolve(currentUser);
 					});
 				} else {
-					deferred.reject({message: 'there was an error initializing the current user!'});
+					deferred.reject('Unable to initialize user');
+				}
+
+				return deferred.promise;
+
+			};
+
+			var getCurrentUser = function(){
+
+				var deferred = $q.defer();
+
+				if (currentUser && currentUser.loggedIn){
+					deferred.resolve(currentUser);
+				} else if (currentUser && !currentUser.loggedIn) {
+					init()
+						.then(function(currentUser){
+							deferred.resolve(currentUser);
+						})
+						.catch(function(error){
+							deferred.reject(error);
+						});
+				} else {
+					deferred.reject('Unable to get current user');
 				}
 
 				return deferred.promise;
 			};
 
-			var getCurrentUser = function(){
-				return currentUser;
-			};
-
-			var setCurrentUser = function(currentUser, cb){
+			var setCurrentUser = function(cb){
 				var payload;
 				payload = AuthService.getPayload();
 				currentUser.firstname = payload.firstname;

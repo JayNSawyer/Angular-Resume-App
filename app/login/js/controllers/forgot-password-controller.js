@@ -11,11 +11,16 @@
 
 		var vm = this;
 
-		vm.resetPassword = function() {
-			ForgotPasswordService.resetPassword(vm.user).then(function(response){
+		vm.resetPassword = resetPassword;
+
+
+		function resetPassword (){
+			ForgotPasswordService.resetPassword(vm.user)
+				.then(function(response){
 				//TODO
-			});
-		};
+				});
+		}
+
 	}
 	
 })();

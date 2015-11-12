@@ -30,68 +30,56 @@
 
 			var vm = this;
 
-			vm.showDashboard = function(){
+			vm.showDashboard = showDashboard;
+			vm.hideDashboard = hideDashboard;
+			vm.logout = logout;
+
+			_init();
+
+
+			function showDashboard() {
 				console.log('show dashboard called!');
 				return true;
-			};
+			}
 
-			vm.hideDashboard = function(){
-				if( !AuthService.isAuthenticated() ){
-					return true;
-				}
-			};
+			function hideDashboard() {
+				return !AuthService.isAuthenticated();
+			}
 
-			/* NOTE: extract CurrentUserService functionality to top-level controller */
-			var init = function(){
+			function logout() {
+				LogoutService.logout()
+					.then(function(data) {
+						return AlertService.emitAlert('user-logged-out');
+					})
+					.then(function(alert){
+						vm.currentUser = '';
+						$location.path("/main");
+					});
+			}
+
+			function _init() {
 				var currentUser;
 
-				currentUser = CurrentUserService.getCurrentUser();
-				if (currentUser){
-					vm.currentUser = currentUser;
-					console.log(currentUser);
-				} else {
-					vm.currentUser = null;
-				}
-			};
-
-			vm.logout = function(){
-				
-				LogoutService.logout().then(function(data){
-					AlertService.emitAlert('user-logged-out').then(function(alert){
-						vm.currentUser = '';
-						$location.path( "/main" );
-					});
-				});
-			};
-
-
-			init();
-
-			
-			$scope.$onRootScope('user-logged-in', function(event, msg){
-					var currentUser = CurrentUserService.getCurrentUser();
-					if (!currentUser){
-						vm.currentUser = null;
-					} else {
+				CurrentUserService.getCurrentUser()
+					.then(function(currentUser){
 						vm.currentUser = currentUser;
-					}
+						vm.showDashboard();
+						console.log(vm.currentUser);
+					})
+					.catch(function(error){
+						vm.currentUser = null;
+						console.log(error);
+					});
+			}
+
+		
+			$scope.$onRootScope('user-logged-in', function(event, msg){
+				_init();
 			});
 
 			$scope.$onRootScope('user-registration-success', function(event, msg){
-					var currentUser = CurrentUserService.getCurrentUser();
-					if (!currentUser){
-						vm.currentUser = null;
-					} else {
-						vm.currentUser = currentUser;
-					}
+				_init();
 			});
 
-			$scope.$watch(function(){
-				return vm.currentUser; //watch this vm
-			}, function(newProp, oldProp){ 
-				if(newProp && newProp.loggedIn){ //the user is authenticated, so continue with setups
-					vm.showDashboard();
-				}
-			});
 	}
 })();

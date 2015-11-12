@@ -8,9 +8,10 @@
 	MainCtrl.$inject = ['$rootScope', '$scope', 'UserService'];
 	
 	function MainCtrl($rootScope, $scope, UserService) {
-		UserService.getUsers().then(function (users) {
-			$scope.users = users;
-		});
+		UserService.getUsers()
+			.then(function (users) {
+				$scope.users = users;
+			});
 	}	
 
 })();

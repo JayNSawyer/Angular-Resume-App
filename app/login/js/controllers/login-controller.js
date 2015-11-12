@@ -12,26 +12,30 @@
 		var vm = this;
 
 		vm.user = {};
-
 		vm.forgotPassword = false;
-
+		vm.submit = submit;
+		vm.forgotPasswordSubmit = forgotPasswordSubmit;
 		$rootScope.message = 'Enter Your Info Below To Log In!';
 
-		vm.submit = function(){
-			LoginService.login(vm.user).then(function(response){
-				console.log(response);
-				AuthService.saveToken(response.data.token);
-				AlertService.emitAlert('user-logged-in');
-				$state.go('main');
-			}, function(response){
-				console.log('the failure: ');
-				console.log(response.data.message);
-				AlertService.emitAlert('user-login-failure');
-			});
-		};
 
-		vm.forgotPasswordSubmit = function(){
+		function submit() {
+			LoginService.login(vm.user)
+				.then(function(response){
+					console.log(response);
+					AuthService.saveToken(response.data.token);
+					AlertService.emitAlert('user-logged-in');
+					$state.go('main');
+				})
+				.catch(function(e){
+					console.log('the failure: ');
+					console.log(e.data.message);
+					AlertService.emitAlert('user-login-failure');
+				})
+		}
+
+		function forgotPasswordSubmit() {
 			console.log(vm.user);
-		};
+		}
+
 	}
 })();
