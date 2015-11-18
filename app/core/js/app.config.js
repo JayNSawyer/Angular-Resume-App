@@ -32,6 +32,12 @@
 					templateUrl: '/login/views/forgot-password.html',
 					controller: 'ForgotPasswordCtrl'
 				})
+				.state('writers', {
+					url: '/writers',
+					templateUrl: '/writers/views/index.html',
+					controller: 'WritersCtrl',
+					controllerAs: 'writersCtrl'
+				})
 				.state('register', {
 					url: '/register',
 					templateUrl: '/register/views/index.html',

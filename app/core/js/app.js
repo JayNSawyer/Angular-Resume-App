@@ -15,6 +15,7 @@
 			'resume.main',
 			'resume.navigation',
 			'resume.register',
-			'resume.user'
+			'resume.user',
+			'resume.writers'
 		]);
 })();

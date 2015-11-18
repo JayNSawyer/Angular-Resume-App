@@ -9,4 +9,5 @@
 	angular.module('resume.register', []);
 	angular.module('resume.shared', []);
 	angular.module('resume.user', []);
+	angular.module('resume.writers', []);
 })();
