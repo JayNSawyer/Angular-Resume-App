@@ -11,15 +11,19 @@
 
 		var self = this;
 
-		var login = function(user){
-			return $http.post('/login', user);
-		};
+		////////////PUBLIC API////////////
 
 		var LoginService = {
 			login: login
 		};
 
 		return LoginService;
+
+		///////////PUBLIC METHODS////////////
+
+		function login(user) {
+			return $http.post('/login', user);
+		};
 
 	}
 })();

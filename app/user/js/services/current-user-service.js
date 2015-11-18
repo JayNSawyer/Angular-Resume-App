@@ -1,76 +1,79 @@
-'use strict';
+(function(){
+	'use strict';
 
-angular.module('resume.user')
-	.factory('CurrentUserService', [
-		'$injector',
-		function ($injector){
-			var $rootScope = $injector.get('$rootScope'),
-				$window = $injector.get('$window'),
-				$q = $injector.get('$q'),
-				AuthService = $injector.get('AuthService');
+	angular
+		.module('resume.user')
+		.factory('CurrentUserService', CurrentUserService);
 
-			var self = this;	
+	CurrentUserService.$inject = ['$rootScope', '$window', '$q', 'AuthService'];
+	
+	function CurrentUserService($rootScope, $window, $q, AuthService) {
 
-			var currentUser = {};
+		var self = this;	
 
-			var init = function(token){
+		var currentUser = {};
 
-				var deferred = $q.defer();
+		////////////PUBLIC API////////////
 
-				if (token) {
-					setCurrentUser(function(currentUser){
-						deferred.resolve(currentUser);
-					});
-				} else if (AuthService.isAuthenticated()){
-					setCurrentUser(function(currentUser){
-						deferred.resolve(currentUser);
-					});
-				} else {
-					deferred.reject('Unable to initialize user');
-				}
+		var CurrentUserService = {
+			init: init,
+			getCurrentUser: getCurrentUser
+		};
 
-				return deferred.promise;
+		return CurrentUserService;
 
-			};
+		///////////PUBLIC METHODS////////////
 
-			var getCurrentUser = function(){
+		function init(token) {
 
-				var deferred = $q.defer();
+			var deferred = $q.defer();
 
-				if (currentUser && currentUser.loggedIn){
+			if (token || AuthService.isAuthenticated()) {
+				//we've got a token (an authenticated user), but current user hasn't been initialized
+				_setCurrentUser(function(currentUser){
 					deferred.resolve(currentUser);
-				} else if (currentUser && !currentUser.loggedIn) {
-					init()
-						.then(function(currentUser){
-							deferred.resolve(currentUser);
-						})
-						.catch(function(error){
-							deferred.reject(error);
-						});
-				} else {
-					deferred.reject('Unable to get current user');
-				}
+				});
+			} else {
+				deferred.reject('Unable to initialize user');
+			}
 
-				return deferred.promise;
-			};
+			return deferred.promise;
 
-			var setCurrentUser = function(cb){
-				var payload;
-				payload = AuthService.getPayload();
-				currentUser.firstname = payload.firstname;
-				currentUser.lastname = payload.lastname;
-				currentUser.email = payload.email;
-				currentUser.username = payload.username;
-				currentUser.loggedIn = true;
-				cb(currentUser);
-			};
-
-			var CurrentUserService = {
-				init: init,
-				getCurrentUser: getCurrentUser
-			};
-
-			return CurrentUserService;
 		}
 
-	]);
+		function getCurrentUser() {
+
+			var deferred = $q.defer();
+
+			if (currentUser && currentUser.loggedIn){
+				deferred.resolve(currentUser);
+			} else if (currentUser && !currentUser.loggedIn) { 
+				init()
+					.then(function(currentUser){
+						deferred.resolve(currentUser);
+					})
+					.catch(function(error){
+						deferred.reject(error);
+					});
+			} else {
+				deferred.reject('Unable to get current user');
+			}
+
+			return deferred.promise;
+		}
+
+		////////////PRIVATE METHODS///////////
+
+		function _setCurrentUser(cb) {
+			var payload;
+			payload = AuthService.getPayload();
+			currentUser.firstname = payload.firstname;
+			currentUser.lastname = payload.lastname;
+			currentUser.email = payload.email;
+			currentUser.username = payload.username;
+			currentUser.loggedIn = true;
+			cb(currentUser);
+		}
+
+	}	
+})();

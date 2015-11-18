@@ -11,26 +11,32 @@
 
 		var token;
 
-		var request = function(config) {
+		////////////PUBLIC API////////////
+
+		var AuthInterceptorService = {
+			request: request,
+			responseError: responseError
+		};
+
+		return AuthInterceptorService;
+
+		///////////PUBLIC METHODS////////////
+
+		function request(config) {
 			config.headers = config.headers || {};
 			token = AuthService.getToken();
 			if (token) {
 				config.headers.Authorization = 'Bearer ' + token;
-				CurrentUserService.init(token);
+				CurrentUserService.init(token); //pre-initialize current user 
 			}
 			return $q.when(config);
 		};
 
-		var responseError = function(rejection) {
+		function responseError(rejection) {
 			if (rejection.status === 403) {
 				$location.path('login');
 			}
 			return $q.reject(rejection);
-		};
-
-		return {
-			request: request,
-			responseError: responseError
 		};
 
 	}

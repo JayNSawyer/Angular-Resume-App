@@ -11,17 +11,21 @@
 
 		var self = this;
 
-		var logout = function(){
-			var deferred = $q.defer();
-			deferred.resolve(AuthService.removeToken());
-			return deferred.promise;
-		};
+		////////////PUBLIC API////////////
 
 		var LogoutService = {
 			logout: logout
 		};
 
 		return LogoutService;
+
+		///////////PUBLIC METHODS////////////
+		
+		function logout() {
+			var deferred = $q.defer();
+			deferred.resolve(AuthService.removeToken());
+			return deferred.promise;
+		};
 
 	}
 })();

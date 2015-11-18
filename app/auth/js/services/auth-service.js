@@ -9,19 +9,33 @@
 
 	function AuthService($window, DecodeTokenService) {
 
-		var saveToken = function(token) {
+		////////////PUBLIC API////////////
+
+		var AuthService = {
+			saveToken: saveToken,
+			getToken: getToken,
+			isAuthenticated: isAuthenticated,
+			getPayload: getPayload,
+			removeToken: removeToken
+		};
+
+		return AuthService;
+
+		///////////PUBLIC METHODS////////////
+
+		function saveToken(token) {
 			$window.localStorage.userToken = token;
 		};
 
-		var getToken = function() {
+		function getToken() {
 			return $window.localStorage.userToken;
 		};
 
-		var removeToken = function() {
+		function removeToken() {
 			$window.localStorage.clear();
 		};
 
-		var getPayload = function() {
+		function getPayload() {
 			var token = getToken();
 			var payload;
 
@@ -33,16 +47,10 @@
 			}
 		};
 
-		var isAuthenticated = function() {
+		function isAuthenticated() {
 			return getToken();
 		};
 
-		return {
-			saveToken: saveToken,
-			getToken: getToken,
-			isAuthenticated: isAuthenticated,
-			getPayload: getPayload,
-			removeToken: removeToken
-		};
+	
 	}
 })();
