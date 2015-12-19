@@ -33,7 +33,7 @@
 		};
 
 		function responseError(rejection) {
-			if (rejection.status === 403) {
+			if (rejection.status === 403 || rejection.status === 401) {
 				$location.path('login');
 			}
 			return $q.reject(rejection);

@@ -1,0 +1,8 @@
+<div class="notifier-container">
+	<div ng-repeat="notifier in notifierCollection" id="notifier" class="notifierCollection alert alert-{{notifier.event}}">
+		{{notifier.message}}
+		<div class="close" ng-click="closeNotifier($index)">
+			<span class="glyphicon glyphicon-remove"></span>
+		</div>
+	</div>
+</div>

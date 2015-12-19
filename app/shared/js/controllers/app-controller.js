@@ -9,7 +9,8 @@ angular.module('resume.shared').controller('AppCtrl', [
 			CurrentUserService = $injector.get('CurrentUserService'),
 			$timeout = $injector.get('$timeout'),
 			AlertService = $injector.get('AlertService'),
-			UserService = $injector.get('UserService');
+			UserService = $injector.get('UserService'),
+			NotifierService = $injector.get('NotifierService');
 
 		var vm = this;	
 
@@ -18,6 +19,11 @@ angular.module('resume.shared').controller('AppCtrl', [
 
 		$scope.closeAlert = function(){
 			console.log('You called me!');
+		};
+
+		$scope.createNotifier = function(){
+			var notifier = {event: 'success', message: 'this is a success!'};
+			NotifierService.addNotifier(notifier.event, notifier.message);
 		};
 	}
 ]);

@@ -3,7 +3,7 @@
 
 	angular
 		.module('resume.auth')
-		.config(AuthConfig)
+		.config(AuthConfig);
 
 	AuthConfig.$inject = ['$httpProvider'];	
 

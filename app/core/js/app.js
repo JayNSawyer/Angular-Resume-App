@@ -6,6 +6,7 @@
 			//Angular  modules
 			'ngResource',
 			'ngRoute',
+			'ngAnimate',
 			//Vendor modules
 			'ui.router',
 			'resume.shared',

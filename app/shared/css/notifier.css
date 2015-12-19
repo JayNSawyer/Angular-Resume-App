@@ -1,0 +1,25 @@
+.notifier-container {
+    z-index: 1;
+    position: fixed;
+ 	right: 20px;
+}
+
+/* ngRepeat */
+
+.notifierCollection {
+    margin-right: 0;
+}
+
+.notifierCollection.ng-enter,
+.notifierCollection.ng-leave {
+	transition: opacity 2s;
+}
+
+.notifierCollection.ng-enter,
+.notifierCollection.ng-leave-active {
+	opacity: 0;
+}
+
+.notifierCollection.ng-enter-active {
+	opacity: 1;
+}

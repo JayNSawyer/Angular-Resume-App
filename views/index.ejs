@@ -41,6 +41,7 @@
 
     <!-- App specific CSS -->
     <link href="/shared/css/alert.css" rel="stylesheet">
+    <link href="/shared/css/notifier.css" rel="stylesheet">
     <link href="/shared/css/app.css" rel="stylesheet">
 
     <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
@@ -52,6 +53,7 @@
 
   </head>
   <body ng-controller="AppCtrl as appCtrl" ng-cloak>
+    <resume-notifiers></resume-notifiers>
     <div ng-include="'/shared/views/partials/alerts.html'"></div>
 
     <!-- Navigation -->
@@ -138,6 +140,7 @@
         <!-- /.container -->
     </nav>
    
+   <button ng-click="createNotifier()">Create Notifier</button>
     <ui-view autoscroll="true"></ui-view>
       <!-- Footer -->
     <footer>
@@ -157,6 +160,7 @@
     <script src="/angular/angular.min.js"></script>
     <script src="/angular-route/angular-route.min.js"></script>
     <script src="/angular-resource/angular-resource.min.js"></script>
+    <script src="/angular-animate/angular-animate.js"></script>
     <script src="/angular-ui-router/release/angular-ui-router.min.js"></script>
     <script src="/polyfills/base64.js"></script>
 
@@ -185,6 +189,7 @@
     <!-- directives -->
     <script src="/shared/js/directives/sameAs.js"></script>
     <script src="/shared/js/directives/alert-directive.js"></script>
+    <script src="/shared/js/directives/notifiers-directive.js"></script>
 
     <!-- services -->
     <script src="/user/js/services/user-service.js"></script>
@@ -196,6 +201,7 @@
     <script src="/login/js/services/forgot-password-service.js"></script>
     <script src="/logout/js/services/logout-service.js"></script>
     <script src="/shared/js/services/alert-service.js"></script>
+    <script src="/shared/js/services/notifier-service.js"></script>
     <script src="/auth/js/services/auth-interceptor-service.js"></script>
 
 

@@ -77,6 +77,18 @@
 
 			return $delegate;
 		}]);
-	}]);
+	}]).run(function($rootScope, $location, $state) {
+      $rootScope.$on('$stateChangeStart',function(event,toState,toParams,fromState){
+  
+         if ( $location.url() === '/login' && $state.current.name === 'login.forgotPassword'){
+         	 console.log('redirect!');
+         	 $location.path('/login/password/new');
+         } else if ($location.url() === '/login' && $state.current.name === 'login.signIn') {
+   	 		console.log('redirect!');
+         	 $location.path('/login/signin');
+         }
+
+        });
+    });
 
 })();
