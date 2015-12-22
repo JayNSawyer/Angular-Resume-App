@@ -11,6 +11,9 @@
             <div ng-message="required">Username is required.</div>
         </div>
     </div>
+    <span ng-if="loginForm.showHideSubmit()">
+        <h1>I am the letter 'A'</h1>
+    </span>
     <div class="textbox-wrap">
         <div class="input-group">
             <span class="input-group-addon "><i class="icon-key icon-color"></i></span>
@@ -34,7 +37,7 @@
                 <span class="checkbox-text" class="col-xs-10">&nbsp;Remember Me</span>
             </div>
             <div class="login-form-submit col-md-6">
-                <button type="submit" class="btn btn-success pull-right green-btn ">Log In! &nbsp; <i class="icon-chevron-right"></i></button>
+                <button ng-disabled="loginForm.$invalid" type="submit" class="btn btn-success pull-right green-btn ">Log In! &nbsp; <i class="icon-chevron-right"></i></button>
             </div>
 
             </div>

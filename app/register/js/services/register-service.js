@@ -1,30 +1,29 @@
-(function(){
-	'use strict';
+(function () {
+    'use strict';
 
-	angular
-	 	.module('resume.register')
-		.factory('RegisterService', RegisterService);
+    angular
+        .module('resume.register')
+        .factory('RegisterService', RegisterService);
 
-	RegisterService.$inject = ['$rootScope', '$http'];
+    RegisterService.$inject = ['$rootScope', '$http'];
+    
+    function RegisterService($rootScope, $http) {
 
-	function RegisterService($rootScope, $http) {
+        var self = this;
 
-		var self = this;
+        ////////////PUBLIC API////////////
 
-		////////////PUBLIC API////////////
+        var RegisterService = {
+            register: register
+        };
 
-		var RegisterService = {
-			register: register
-		};
+        return RegisterService;
 
-		return RegisterService;
+        ///////////PUBLIC METHODS////////////
 
-		///////////PUBLIC METHODS////////////
+        function register(user) {
+            return $http.post('/register', user);
+        }
 
-		function register(user) {
-			return $http.post('/register', user);
-		}
-		
-	}
+    }
 })();
-

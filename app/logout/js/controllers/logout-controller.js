@@ -1,21 +1,21 @@
-(function(){
-	'use strict';
+(function () {
+    'use strict';
 
-	angular
-		.module('resume.logout')
-		.controller('LogoutCtrl', LogoutCtrl);
+    angular
+        .module('resume.logout')
+        .controller('LogoutCtrl', LogoutCtrl);
 
-	LogoutCtrl.$inject = ['$scope', '$rootScope', '$state', 'AuthService', 'LogoutService'];	
+    LogoutCtrl.$inject = ['$scope', '$rootScope', '$state', 'AuthService', 'LogoutService'];
 
-	function LogoutCtrl($scope, $rootScope, $state, AuthService, LogoutService){
+    function LogoutCtrl($scope, $rootScope, $state, AuthService, LogoutService) {
 
-		var vm = this;
+        var vm = this;
 
-		vm.logout = logout;
+        vm.logout = logout;
 
-		function logout() {
-			LogoutService.logout();
-		}
+        function logout() {
+            LogoutService.logout();
+        }
 
-	}
+    }
 })();

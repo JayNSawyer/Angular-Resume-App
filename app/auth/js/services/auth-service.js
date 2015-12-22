@@ -1,56 +1,56 @@
-(function() {
-	'use strict';
+(function () {
+    'use strict';
 
-	angular
-		.module('resume.auth')
-		.factory('AuthService', AuthService);
+    angular
+        .module('resume.auth')
+        .factory('AuthService', AuthService);
 
-	AuthService.$inject = ['$window', 'DecodeTokenService'];
+    AuthService.$inject = ['$window', 'DecodeTokenService'];
 
-	function AuthService($window, DecodeTokenService) {
+    function AuthService($window, DecodeTokenService) {
 
-		////////////PUBLIC API////////////
+        ////////////PUBLIC API////////////
 
-		var AuthService = {
-			saveToken: saveToken,
-			getToken: getToken,
-			isAuthenticated: isAuthenticated,
-			getPayload: getPayload,
-			removeToken: removeToken
-		};
+        var AuthService = {
+            saveToken: saveToken,
+            getToken: getToken,
+            isAuthenticated: isAuthenticated,
+            getPayload: getPayload,
+            removeToken: removeToken
+        };
 
-		return AuthService;
+        return AuthService;
 
-		///////////PUBLIC METHODS////////////
+        ///////////PUBLIC METHODS////////////
 
-		function saveToken(token) {
-			$window.localStorage.userToken = token;
-		};
+        function saveToken(token) {
+            $window.localStorage.userToken = token;
+        };
 
-		function getToken() {
-			return $window.localStorage.userToken;
-		};
+        function getToken() {
+            return $window.localStorage.userToken;
+        };
 
-		function removeToken() {
-			$window.localStorage.clear();
-		};
+        function removeToken() {
+            $window.localStorage.clear();
+        };
 
-		function getPayload() {
-			var token = getToken();
-			var payload;
+        function getPayload() {
+            var token = getToken();
+            var payload;
 
-			if (!token) {
-				return false;
-			} else {
-				payload = DecodeTokenService.decodeToken(token);
-				return payload;
-			}
-		};
+            if (!token) {
+                return false;
+            } else {
+                payload = DecodeTokenService.decodeToken(token);
+                return payload;
+            }
+        };
 
-		function isAuthenticated() {
-			return getToken();
-		};
+        function isAuthenticated() {
+            return getToken();
+        };
 
-	
-	}
+
+    }
 })();
