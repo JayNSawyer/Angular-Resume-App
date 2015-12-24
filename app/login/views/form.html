@@ -2,28 +2,19 @@
     <div class="section-title">
         <h3>LogIn to your Account</h3>
     </div>
-    <div class="textbox-wrap">
+    <div class="textbox-wrap" ra-validations-messages>
         <div class="input-group">
             <span class="input-group-addon "><i class="icon-user icon-color"></i></span>
             <input type="text" ng-minlength="6" name="username" ng-model="loginCtrl.user.username" required class="form-control" placeholder="Username" />
         </div>
-        <div class="help-block" ng-messages="loginForm.username.$error" ng-if="loginForm.username.$invalid">
-            <div ng-message="required" ng-if="(loginForm.username.$viewValue === '') || (loginForm.username.$pristine)">Username is required.</div>
-            <div ng-message="minlength" ng-if="loginForm.username.$viewValue.length > 0">Username must be at least 6 characters.</div>
-        </div>
     </div>
-    <span ng-if="loginForm.showHideSubmit()">
-        <h1>I am the letter 'A'</h1>
-    </span>
-    <div class="textbox-wrap">
+
+    <div class="textbox-wrap" ra-validations-messages>
         <div class="input-group">
             <span class="input-group-addon "><i class="icon-key icon-color"></i></span>
             <input type="password" name="password" ng-minlength="6" ng-model="loginCtrl.user.password" required class="form-control " placeholder="Password" />
         </div>
-        <div class="help-block" ng-messages="loginForm.password.$error" ng-if="loginForm.password.$invalid">
-            <div ng-message="required" ng-if="(loginForm.password.$viewValue === '') || (loginForm.password.$pristine)">Password is required.</div>
-            <div ng-message="minlength" ng-if="loginForm.password.$viewValue.length > 0">Password must be at least 6 characters.</div>
-        </div>
+       
     </div>
     <div class="login-form-action clearfix">
         <div class="checkbox-wrap">

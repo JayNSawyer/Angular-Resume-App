@@ -16,8 +16,8 @@
         vm.submit = submit;
         vm.forgotPasswordSubmit = forgotPasswordSubmit;
         $rootScope.message = 'Enter Your Info Below To Log In!';
-    
-        
+
+
         function submit() {
             LoginService.login(vm.user)
                 .then(function (response) {
