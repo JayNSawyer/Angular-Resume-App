@@ -1,45 +1,43 @@
 <!DOCTYPE html>
 <html data-ng-app="resume">
-  <head>
+
+<head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="description" content="">
     <meta name="author" content="">
 
-    <title><%= title %></title>
+    <title>
+        <%= title %>
+    </title>
 
     <style>
-    body {
-        z-index: 100
-    }
-
-    a[ng-click]{
-        cursor: pointer;
-    }
-
-
+        body {
+            z-index: 100
+        }
+        
+        a[ng-click] {
+            cursor: pointer;
+        }
     </style>
 
-    <!-- vendor non-JS assets -->
-    <link rel="stylesheet" href="/bootstrap/dist/css/bootstrap.min.css">
-    <!--<link rel='stylesheet' href='/login/css/style.css' />-->
+    <!-- Vendor stylesheet assets -->
+
+    <!--bower:css-->
+    <link rel="stylesheet" href="/animate.css/animate.css" />
+    <link rel="stylesheet" href="/bootstrap/dist/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="/font-awesome/css/font-awesome.min.css" />
+    <!--endbower-->
+    
     <link href="/starterbootstrap/css/modern-business.css" rel="stylesheet">
-    <link href="/starterbootstrap/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
-
-    <!-- Eternity Login , Registration & Forgot Password Forms CSS -->
     <link href="/eternityforms/css/forms.css" rel="stylesheet" />
-
-    <!-- Animations CSS -->
-    <link href="/eternityforms/css/animate.min.css" rel="stylesheet" />
-
-    <!-- Font Icons -->
-    <link href="/eternityforms/css/font-awesome.min.css" rel="stylesheet" />
-
+    
     <!-- Google Web Fonts -->
     <link href='http://fonts.googleapis.com/css?family=Roboto:400,300' rel='stylesheet' type='text/css'>
 
     <!-- App specific CSS -->
+    <link href='/login/css/style.css' rel='stylesheet' />
     <link href="/shared/css/alert.css" rel="stylesheet">
     <link href="/shared/css/notifier.css" rel="stylesheet">
     <link href="/shared/css/app.css" rel="stylesheet">
@@ -51,8 +49,9 @@
         <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
     <![endif]-->
 
-  </head>
-  <body ng-controller="AppCtrl as appCtrl" ng-cloak>
+</head>
+
+<body ng-controller="AppCtrl as appCtrl" ng-cloak>
     <resume-notifiers></resume-notifiers>
     <div ng-include="'/shared/views/partials/alerts.html'"></div>
 
@@ -123,7 +122,7 @@
                     </li>
                 </ul>
                 <ul ng-if="navigationCtrl.currentUser.loggedIn" class="nav navbar-nav navbar-right">
-                     <li ui-sref-active="active">
+                    <li ui-sref-active="active">
                         <a ui-sref="main">Home</a>
                     </li>
                     <li ui-sref-active="active">
@@ -132,17 +131,17 @@
                     <li>
                         <a href="#">Welcome back, {{navigationCtrl.currentUser.firstname}}!</a>
                     </li>
-            
+
                 </ul>
             </div>
             <!-- /.navbar-collapse -->
         </div>
         <!-- /.container -->
     </nav>
-   
-   <button ng-click="createNotifier()">Create Notifier</button>
+
+    <button ng-click="createNotifier()">Create Notifier</button>
     <ui-view autoscroll="true"></ui-view>
-      <!-- Footer -->
+    <!-- Footer -->
     <footer>
         <div class="container">
             <div class="row">
@@ -155,13 +154,16 @@
 
 
     <!-- ###vendor JS files### -->
-    <script src="/jquery/dist/jquery.min.js"></script>
-    <script src="/bootstrap/dist/js/bootstrap.min.js"></script>
-    <script src="/angular/angular.min.js"></script>
-    <script src="/angular-route/angular-route.min.js"></script>
-    <script src="/angular-resource/angular-resource.min.js"></script>
+    <!-- bower:js -->
+    <script src="/jquery/dist/jquery.js"></script>
+    <script src="/angular/angular.js"></script>
+    <script src="/angular-route/angular-route.js"></script>
+    <script src="/angular-resource/angular-resource.js"></script>
+    <script src="/angular-ui-router/release/angular-ui-router.js"></script>
     <script src="/angular-animate/angular-animate.js"></script>
-    <script src="/angular-ui-router/release/angular-ui-router.min.js"></script>
+    <script src="/bootstrap/dist/js/bootstrap.js"></script>
+    <!-- endbower -->
+
     <script src="/polyfills/base64.js"></script>
 
     <!-- Eternity Forms Vendor-->
@@ -234,14 +236,12 @@
 
     <!-- Script to Activate the Carousel -->
     <script>
-    $('.carousel').carousel({
-        interval: 5000 //changes the speed
-    })
-
-
+        $('.carousel').carousel({
+            interval: 5000 //changes the speed
+        })
     </script>
 
-      <!-- For Initializing Checkbox And Focus Event For Textbox -->
+    <!-- For Initializing Checkbox And Focus Event For Textbox -->
     <script type="text/javascript">
         $(function () {
 
@@ -268,15 +268,6 @@
 
         });
     </script>
-  </body>
+</body>
+
 </html>
-
-
-
-
-
-
-
-
-
-
