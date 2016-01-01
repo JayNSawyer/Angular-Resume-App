@@ -3,6 +3,7 @@
 
     var gulp = require('gulp');
     var args = require('yargs').argv;
+    var angularFilesort = require('gulp-angular-filesort');
     var config = require('./gulp.config')();
 
 
@@ -29,9 +30,22 @@
             directory: './vendor',
             ignorePath: '../vendor'
         };
+
+        var injectSrc = gulp.src([
+            './app/**/**/**/*.js',
+            './app/**/*.js',
+            './vendor/eternityforms/js/*.min.js',
+            './vendor/polyfills/*.js',
+            './app/**/*.css']);
         
+        var injectOptions = {
+            ignorePath: ['/app', '/vendor']
+        };
+
         return gulp.src('./views/*.ejs')
-            .pipe(wiredep(options))
+            .pipe(wiredep(options)) //wiredep only loads bower dependencies
+            .pipe($gulp.inject(injectSrc, injectOptions)) //to load non-bower dependencies
+            .pipe(angularFilesort())
             .pipe(gulp.dest('./views'));
     });
 

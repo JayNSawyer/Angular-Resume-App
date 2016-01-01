@@ -29,18 +29,20 @@
     <link rel="stylesheet" href="/bootstrap/dist/css/bootstrap.min.css" />
     <link rel="stylesheet" href="/font-awesome/css/font-awesome.min.css" />
     <!--endbower-->
-    
+
     <link href="/starterbootstrap/css/modern-business.css" rel="stylesheet">
     <link href="/eternityforms/css/forms.css" rel="stylesheet" />
-    
+
     <!-- Google Web Fonts -->
     <link href='http://fonts.googleapis.com/css?family=Roboto:400,300' rel='stylesheet' type='text/css'>
 
     <!-- App specific CSS -->
-    <link href='/login/css/style.css' rel='stylesheet' />
-    <link href="/shared/css/alert.css" rel="stylesheet">
-    <link href="/shared/css/notifier.css" rel="stylesheet">
-    <link href="/shared/css/app.css" rel="stylesheet">
+    <!--inject:css-->
+    <link rel="stylesheet" href="/login/css/style.css">
+    <link rel="stylesheet" href="/shared/css/alert.css">
+    <link rel="stylesheet" href="/shared/css/app.css">
+    <link rel="stylesheet" href="/shared/css/notifier.css">
+    <!--endinject-->
 
     <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
@@ -164,29 +166,22 @@
     <script src="/bootstrap/dist/js/bootstrap.js"></script>
     <!-- endbower -->
 
-    <script src="/polyfills/base64.js"></script>
-
-    <!-- Eternity Forms Vendor-->
-    <!-- PlaceHolder For Older Browsers -->
+    <!--inject:js-->
+    <script src="/eternityforms/js/jquery.icheck.min.js"></script>
     <script src="/eternityforms/js/placeholders.min.js"></script>
-
-    <!-- Custom Checkbox PLugin -->
-    <script src="/eternityforms/js/jquery.icheck.js"></script>
-
-    <!-- Media Query Support For Older Browsers [Ie 8 & lower] -->
     <script src="/eternityforms/js/respond.min.js"></script>
-    <!-- end Eternity Forms Vendor -->
+    <script src="/polyfills/base64.js"></script>
+    <!--endinject-->
 
-    <!-- end ###vendor JS files### -->
 
-    <!-- app files -->
+   
+    <!-- APPLICATION FILES -->
+    <!-- core files -->
     <script src="/core/js/app.js"></script>
     <script src="/core/js/app.modules.js"></script>
     <script src="/core/js/app.config.js"></script>
 
-
     <!-- config files -->
-
 
     <!-- directives -->
     <script src="/shared/js/directives/sameAs.js"></script>
@@ -207,8 +202,6 @@
     <script src="/shared/js/services/notifier-service.js"></script>
     <script src="/auth/js/services/auth-interceptor-service.js"></script>
 
-
-
     <!-- controllers -->
     <script src="/shared/js/controllers/app-controller.js"></script>
     <script src="/main/js/controllers/main-controller.js"></script>
@@ -222,12 +215,6 @@
     <script src="/writers/js/controllers/writers-controller.js"></script>
 
 
-    <!-- config files -->
-    <script src="/auth/js/auth.config.js"></script>
-
-
-
-
 
 
 
@@ -239,34 +226,6 @@
         $('.carousel').carousel({
             interval: 5000 //changes the speed
         })
-    </script>
-
-    <!-- For Initializing Checkbox And Focus Event For Textbox -->
-    <script type="text/javascript">
-        $(function () {
-
-            //Custom Checkbox For Light Theme
-            $("input").iCheck({
-                checkboxClass: 'icheckbox_square-blue',
-                increaseArea: '20%'
-            });
-
-
-            //Custom Checkbox For Dark Theme
-            $(".dark input").iCheck({
-                checkboxClass: 'icheckbox_polaris',
-                increaseArea: '20%'
-            });
-
-
-            //TextBox Focus Event
-            $(".form-control").focus(function () {
-                $(this).closest(".textbox-wrap").addClass("focused");
-            }).blur(function () {
-                $(this).closest(".textbox-wrap").removeClass("focused");
-            });
-
-        });
     </script>
 </body>
 
