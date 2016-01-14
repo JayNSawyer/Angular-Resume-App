@@ -15,11 +15,17 @@
 	transition: opacity 2s;
 }
 
+
 .notifierCollection.ng-enter,
 .notifierCollection.ng-leave-active {
 	opacity: 0;
 }
 
+.notifierCollection.ng-enter {
+    transition: transform 1.0s ease-out; 
+}
+
 .notifierCollection.ng-enter-active {
 	opacity: 1;
+    transform: rotate(360deg); 
 }

@@ -44,6 +44,7 @@
     <link rel="stylesheet" href="/shared/css/notifier.css">
     <!--endinject-->
 
+
     <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
     <!--[if lt IE 9]>
@@ -154,8 +155,6 @@
         </div>
     </footer>
 
-
-    <!-- ###vendor JS files### -->
     <!-- bower:js -->
     <script src="/jquery/dist/jquery.js"></script>
     <script src="/angular/angular.js"></script>
@@ -165,54 +164,49 @@
     <script src="/angular-animate/angular-animate.js"></script>
     <script src="/bootstrap/dist/js/bootstrap.js"></script>
     <!-- endbower -->
+    
+    <!-- testing -->
+    <script src="/angular-mocks/angular-mocks.js"></script>
 
-    <!--inject:js-->
+    <!-- ###vendor JS files### -->
     <script src="/eternityforms/js/jquery.icheck.min.js"></script>
     <script src="/eternityforms/js/placeholders.min.js"></script>
     <script src="/eternityforms/js/respond.min.js"></script>
     <script src="/polyfills/base64.js"></script>
-    <!--endinject-->
 
-
-   
-    <!-- APPLICATION FILES -->
-    <!-- core files -->
-    <script src="/core/js/app.js"></script>
+    <!--inject:js-->
     <script src="/core/js/app.modules.js"></script>
-    <script src="/core/js/app.config.js"></script>
-
-    <!-- config files -->
-
-    <!-- directives -->
-    <script src="/shared/js/directives/sameAs.js"></script>
-    <script src="/shared/js/directives/alert-directive.js"></script>
-    <script src="/shared/js/directives/notifiers-directive.js"></script>
-    <script src="/login/js/directives/validation-messages-directive.js"></script>
-
-    <!-- services -->
+    <script src="/writers/js/controllers/writers-controller.js"></script>
     <script src="/user/js/services/user-service.js"></script>
-    <script src="/shared/js/services/decode-token-service.js"></script>
-    <script src="/auth/js/services/auth-service.js"></script>
     <script src="/user/js/services/current-user-service.js"></script>
-    <script src="/register/js/services/register-service.js"></script>
-    <script src="/login/js/services/login-service.js"></script>
-    <script src="/login/js/services/forgot-password-service.js"></script>
-    <script src="/logout/js/services/logout-service.js"></script>
-    <script src="/shared/js/services/alert-service.js"></script>
+    <script src="/shared/js/directives/alert-directive.js"></script>
     <script src="/shared/js/services/notifier-service.js"></script>
-    <script src="/auth/js/services/auth-interceptor-service.js"></script>
-
-    <!-- controllers -->
+    <script src="/shared/js/services/decode-token-service.js"></script>
+    <script src="/shared/js/services/alert-service.js"></script>
+    <script src="/shared/js/directives/sameAs.js"></script>
+    <script src="/shared/js/directives/notifiers-directive.js"></script>
     <script src="/shared/js/controllers/app-controller.js"></script>
-    <script src="/main/js/controllers/main-controller.js"></script>
-    <script src="/login/js/controllers/login-controller.js"></script>
-    <script src="/login/js/controllers/forgot-password-controller.js"></script>
-    <script src="/logout/js/controllers/logout-controller.js"></script>
-    <script src="/register/js/controllers/register-controller.js"></script>
-    <script src="/navigation/js/controllers/navigation-controller.js"></script>
     <script src="/shared/js/controllers/alert-parent-controller.js"></script>
     <script src="/shared/js/controllers/alert-controller.js"></script>
-    <script src="/writers/js/controllers/writers-controller.js"></script>
+    <script src="/register/js/controllers/register-controller.js"></script>
+    <script src="/register/js/services/register-service.js"></script>
+    <script src="/navigation/js/controllers/navigation-controller.js"></script>
+    <script src="/main/js/controllers/main-controller.js"></script>
+    <script src="/logout/js/controllers/logout-controller.js"></script>
+    <script src="/logout/js/services/logout-service.js"></script>
+    <script src="/login/js/services/login-service.spec.js"></script>
+    <script src="/login/js/services/login-service.js"></script>
+    <script src="/login/js/services/forgot-password-service.js"></script>
+    <script src="/login/js/controllers/login-controller.js"></script>
+    <script src="/login/js/controllers/forgot-password-controller.js"></script>
+    <script src="/login/js/directives/validation-messages-directive.js"></script>
+    <script src="/auth/js/services/auth-service.js"></script>
+    <script src="/auth/js/services/auth-interceptor-service.js"></script>
+    <script src="/core/js/app.js"></script>
+    <script src="/core/js/app.constants.js"></script>
+    <script src="/core/js/app.config.js"></script>
+    <script src="/auth/js/auth.config.js"></script>
+    <!--endinject-->
 
 
 

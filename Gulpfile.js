@@ -3,8 +3,8 @@
 
     var gulp = require('gulp');
     var args = require('yargs').argv;
-    var angularFilesort = require('gulp-angular-filesort');
     var config = require('./gulp.config')();
+    var nodemon = require('gulp-nodemon');
 
 
     var $gulp = require('gulp-load-plugins')({
@@ -13,7 +13,7 @@
 
     var wiredep = require('wiredep').stream;
 
-    gulp.task('build', function () {
+    gulp.task('lint', function () {
         return gulp.src(config.srcFiles)
             .pipe($gulp.if(args.verbose, $gulp.print()))
             .pipe($gulp.jscs())
@@ -24,29 +24,27 @@
     });
 
     gulp.task('inject', function () {
+        var injectCssSrc = gulp.src(config.injectCssSrc, {
+            read: false
+        });
 
-        var options = {
-            bowerJson: require('./bower.json'),
-            directory: './vendor',
-            ignorePath: '../vendor'
-        };
-
-        var injectSrc = gulp.src([
-            './app/**/**/**/*.js',
-            './app/**/*.js',
-            './vendor/eternityforms/js/*.min.js',
-            './vendor/polyfills/*.js',
-            './app/**/*.css']);
-        
-        var injectOptions = {
-            ignorePath: ['/app', '/vendor']
-        };
-
-        return gulp.src('./views/*.ejs')
-            .pipe(wiredep(options)) //wiredep only loads bower dependencies
-            .pipe($gulp.inject(injectSrc, injectOptions)) //to load non-bower dependencies
-            .pipe(angularFilesort())
+        gulp.src('./views/*.ejs')
+            .pipe(wiredep(config.bowerOptions)) //wiredep only loads bower dependencies 
+            .pipe($gulp.inject(injectCssSrc, config.ignorePaths))
+            .pipe($gulp.inject(
+                gulp.src([config.srcFiles[0], config.srcFiles[1]])
+                .pipe($gulp.angularFilesort()), config.ignorePaths
+            ))
             .pipe(gulp.dest('./views'));
+
+    });
+
+    gulp.task('serve', ['lint', 'inject'], function () {
+
+        return nodemon(config.serveOptions)
+            .on('restart', function(e){
+                console.log('Restarting server...')
+        })
     });
 
 })();
