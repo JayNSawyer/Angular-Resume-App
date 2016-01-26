@@ -7,11 +7,10 @@ var auth = expressJWT({secret: secrets.SECRET});
 
 
 
-function authenticate(req, res, next){
+function validate(req, res){
 	if (!req.body.username || !req.body.password){
-		res.status(400).json({message: 'There was a problem with your username or password'});
+		return res.status(400).json({message: 'There was a problem with your username or password'});
 	}
-	next();
 };
 
 function generateAuthToken(user, days){
@@ -24,7 +23,7 @@ function generateAuthToken(user, days){
 	}
 
 	return jwt.sign({
-		_id: user._id,
+		id: user.id,
 		firstname: user.firstname,
 		lastname: user.lastname,
 		email: user.email,
@@ -34,7 +33,7 @@ function generateAuthToken(user, days){
 };
 
 var Auth = {
-	authenticate: authenticate,
+	validate: validate,
 	generateAuthToken: generateAuthToken
 };
 
