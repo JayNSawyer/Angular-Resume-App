@@ -9,7 +9,7 @@
 
   var $gulp = require('gulp-load-plugins')({
     lazy: true
-  }); //$gulp will automagically load node module names of 'gulp' and 'gulp-'
+  }); 
 
   var wiredep = require('wiredep').stream;
 

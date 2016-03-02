@@ -2,15 +2,15 @@
   "name": "resume-app",
   "version": "0.0.0",
   "authors": [
-    "Jay Sawyer <jnaeem31@gmail.com>"
+    "Jay Sawyer <jaynsawyer@gmail.com>"
   ],
   "license": "MIT",
   "ignore": [
     "**/.*",
     "node_modules",
     "bower_components",
-    "test",
-    "tests"
+    "server/test",
+    "server/tests"
   ],
   "dependencies": {
     "jquery": "~2.1.4",
