@@ -6,6 +6,8 @@ var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
 var passport = require('passport');
 var mailer = require('express-mailer'); //we'll use this mailer later
+
+require('./authentication/passport');
 var routes = require('./routes/index');
 
 var app = express();

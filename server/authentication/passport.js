@@ -10,11 +10,13 @@ var register = require('../services/register');
 var loginStrategy = new LocalStrategy(
 	function (username, password, done){
 		User.findOne({username: username}, function(error, user){
+			//TODO: promisify!
 			if (error){ return done(error); }
 			if (!user){
 				return done(null, false);
 			}
 			if( user.validatePassword(password, user.salt) ){
+			//TODO: promisify!
 				return done(null, user);
 			} else {
 				return done(null, false);
