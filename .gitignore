@@ -8,8 +8,10 @@ node_modules/**/*.target
 node_modules/**/.deps/
 node_modules/**/build/Makefile
 node_modules/**/**/build/Makefile
+node_modules/
 npm-debug.log
 helpers/hash.js
 config/secrets.js
 .idea/
+.gitignore
 

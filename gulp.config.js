@@ -7,9 +7,9 @@
 
             //specify js files to pipe in the gulpfile
             srcFiles: [
-				'./app/**/**/**/*.js',
-                './app/**/**/*.js',
-				'./app/**/*.js',
+				'./client/**/**/**/*.js',
+                './client/**/**/*.js',
+				'./client/**/*.js',
 				'./*.js',
                 '*.js'
 			],
@@ -18,16 +18,16 @@
                 directory: './vendor',
                 ignorePath: '../vendor'
             },
-            injectCssSrc: ['./app/**/*.css'],
+            injectCssSrc: ['./client/**/*.css'],
             ignorePaths: {
-                ignorePath: ['/app', '/vendor']
+                ignorePath: ['/client', '/vendor']
             },
             serveOptions: {
                 script: './bin/www',
                 delayTime: 1,
                 watch: [
-				    './app/**/**/**/*.js',
-				    './app/**/*.js',
+				    './client/**/**/**/*.js',
+				    './client/**/*.js',
 				    './*.js',
                     '*.js']
             }
