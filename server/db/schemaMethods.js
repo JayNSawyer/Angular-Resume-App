@@ -1,5 +1,8 @@
-var Auth = require('../authentication/authenticate');
-var Hasher = require('../authentication/hash');
+'use strict';
+
+let TokenService = require('../services/tokenService');
+let HashService = require('../services/hashService');
+let SchemaMethods = require('./schemaMethods.js');
 
 function toJSON() {
 	var obj = this.toObject();
@@ -10,22 +13,29 @@ function toJSON() {
 };
 
 
-function validatePassword(password, salt) {
-	var compareHash = Hasher.createHash(password, salt);
-	if (compareHash === this.passwordHash) {
-		return true;
-	}
+function validatePassword(password, passwordHash) {
+	return HashService.comparePasswordToHash(password, passwordHash)
+		.then((res) => { 
+			if (res) {
+				return true;
+			} else {
+				return false;
+			}
+		})
+		.catch((error) => {
+			return error;
+		});
 };
 
 function getSalt() {
 	return this.salt;
 };
 
-function generateAuthToken(days) {
+function getToken(days) {
 	if (days) {
-		return Auth.generateAuthToken(this, days);
+		return TokenService.generateAuthToken(this, days);
 	} else {
-		return Auth.generateAuthToken(this, null);
+		return TokenService.generateAuthToken(this, null);
 	}
 };
 
@@ -34,5 +44,5 @@ module.exports = {
 	toJSON: toJSON,
 	validatePassword: validatePassword,
 	getSalt: getSalt,
-	generateAuthToken: generateAuthToken
+	getToken: getToken
 };

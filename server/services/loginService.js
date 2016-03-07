@@ -1,32 +1,27 @@
 'use strict';
 
-var passport = require('passport');
-var Promise = require('bluebird');
+let passport = require('passport');
+let Promise = require('bluebird');
 
+function verifyCredentials(req, res, next) {
 
-var LoginService = (function () {
+	return new Promise((resolve, reject) => {
 
-	function verifyCredentials(req, res, next) {
+		passport.authenticate('local-login', (error, token) => {
+			if (error) {
+				reject(error);
+			}
+			if (token) {
+				resolve(token);
+			}
+		})(req, res, next);
 
-		return new Promise(function (resolve, reject) {
+	});
+}
 
-			passport.authenticate('local-login', function (error, user) {
-				if (error) {
-					reject(error);
-				}
-				if (user) {
-					resolve(user);
-				}
-			})(req, res, next);
-
-		});
-	}
-
-	return {
-		verifyCredentials: verifyCredentials
-	};
-
-}());
-
+let LoginService = {
+	verifyCredentials: verifyCredentials
+};
 
 module.exports = LoginService;
+

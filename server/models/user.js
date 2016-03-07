@@ -1,21 +1,12 @@
-var mongoose = require('mongoose');
-var mongooseBird = require('mongoose-bird')(mongoose);
-var userSchema = require('../db/schema.js')['userSchema'];
+'use strict';
+
+let mongoose = require('mongoose');
+let mongooseBird = require('mongoose-bird')(mongoose);
+let userSchema = require('../db/schema.js');
+
 //var seed = require('../db/seeds.js')['seedUser'];
 
-var User = mongoose.model('User', userSchema);
 
-/*
-User.find({})
-	.execAsync()
-	.then(function (collection) {
-		if (collection.length === 0) {
-			seed(User);
-		}
-	})
-	.catch(function (error) {
-		console.log(error);
-	})
-*/
+let User = mongoose.model('User', userSchema);
 
 module.exports = User;

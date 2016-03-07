@@ -1,12 +1,12 @@
 'use strict';
 
-var mongoose = require('mongoose');
-var mongooseBird = require('mongoose-bird')(mongoose);
-var User = require('../models/user');
+let mongoose = require('mongoose');
+let mongooseBird = require('mongoose-bird')(mongoose);
+let User = require('../models/user');
 
 
 
-var ApplicationController = (function () {
+let ApplicationController = (() => {
 
 	function home(req, res) {
 		res.render('index', {

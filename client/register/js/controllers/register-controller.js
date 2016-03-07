@@ -19,6 +19,7 @@
                 AlertService.emitAlert('user-registration-success');
                 $state.go('main');
             }, function (error) {
+				console.log(error);
                 AlertService.emitAlert('user-registration-failure');
             });
         };

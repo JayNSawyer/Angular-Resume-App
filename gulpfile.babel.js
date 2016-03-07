@@ -5,13 +5,15 @@
   import gulpConfig from './gulp.config';
   import nodemon from 'gulp-nodemon';
   import gulpLoadPlugins from 'gulp-load-plugins';
-  import wiredep from 'wiredep.stream';
+  import wiredepLib from 'wiredep';
 
   const args = yargs.argv;
   const config = gulpConfig();
+  const wiredep = wiredepLib.stream;
   const $gulp = gulpLoadPlugins({
   	lazy: true
   });
+
 
 
   gulp.task('lint', () => {

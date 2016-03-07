@@ -1,23 +1,17 @@
 'use strict';
 
-var mongoose = require('mongoose');
-var mongooseBird = require('mongoose-bird')(mongoose);
-var User = require('../../models/user');
+let mongoose = require('mongoose');
+let mongooseBird = require('mongoose-bird')(mongoose);
+let User = require('../../models/user');
 
 
-var UserController = (function () {
-
+let UserController = (() => {
 	function index(req, res) {
 		User.find()
 			.execAsync()
-			.then(function (users) {
-				res.json(users);
-			})
-			.catch(function (error) {
-				console.log(error);
-			});
+			.then((users) => { res.json(users) })
+			.catch((error) => { console.log(error) });
 	}
-
 	return {
 		index: index
 	};

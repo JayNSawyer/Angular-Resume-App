@@ -1,52 +1,65 @@
-var passport = require('passport');
-var LocalStrategy = require('passport-local').Strategy;
-var mongoose = require('mongoose');
-//var User = mongoose.model('User');
-var User = require('../models/user');
-var Hasher = require('../authentication/hash');
-var register = require('../services/register');
+'use strict';
 
+let passport = require('passport');
+let LocalStrategy = require('passport-local').Strategy;
+let mongoose = require('mongoose');
+let Promise = require('bluebird');
+let User = require('../models/user');
+let createUser = require('../services/createUserService')['createUser'];
 
-var loginStrategy = new LocalStrategy(
-	function (username, password, done){
-		User.findOne({username: username}, function(error, user){
-			//TODO: promisify!
-			if (error){ return done(error); }
-			if (!user){
-				return done(null, false);
-			}
-			if( user.validatePassword(password, user.salt) ){
-			//TODO: promisify!
-				return done(null, user);
-			} else {
-				return done(null, false);
-			}
-		});
-	}
-);
+mongoose.Promise = Promise;
 
-var registerStrategy = new LocalStrategy(
-	{passReqToCallback : true},
-	function (req, username, password, done){
-		//ensure user does NOT already exist!
-		User.findOne({username: username}, function(error, user){
-			if (error){ return done(error); }
-			if (!user){ //user not found, so create a new user
-				var body = req.body
-				var newUser = register.createUser(body);
+let loginStrategy = new LocalStrategy(
+	(username, password, done) => {
 
-				newUser.save(function (error){
-					done(null, newUser);
-				});
-			} else {
-				//user already exists with this username!
-				return done(null, false);
-			}
-		});
-
+		var foundUser;
 		
+		User.findOne({username: username})
+			.then((user) => {
+				if (!user) {
+					return done(null, false);
+				}
+				foundUser = user;
+				return user.validatePassword(password, user.passwordHash);
+			})
+			.then((res) => {
+				if (res) {
+					return done(null, foundUser.getToken());
+				} else {
+					return done(null, false);
+				}
+			})
+			.catch((error) => {
+				console.log('error in passport loginStrategy: ' + error);
+				return done(error);
+			});
 	}
 );
+
+let registerStrategy = new LocalStrategy(
+	{ passReqToCallback: true}, (req, username, password, done) => {
+	//ensure user does NOT already exist!
+	User.findOne({username: username})
+		.then((user) => {
+			if (!user) {
+				return createUser(req.body);
+			} else {
+				//user already exists
+				return done(null, false);
+			}
+		})
+		.then((user) => {
+			return user.save();
+		})
+		.then((newUser) => {
+			return done(null, newUser.getToken());
+		})
+		.catch((error) => {
+			console.log('error in passport registerStrategy: ' + error);
+			return done(error);
+		});
+		
+});
 
 passport.use('local-login', loginStrategy);
 passport.use('local-register', registerStrategy);

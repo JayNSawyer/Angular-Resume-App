@@ -1,9 +1,12 @@
-var mongoose = require('mongoose');
-var SchemaMethods = require("./schemaMethods");
+'use strict';
 
-var Schema = mongoose.Schema;
+let mongoose = require('mongoose');
+let SchemaMethods = require("./schemaMethods");
+let TokenService = require('../services/tokenService');
+let HashService = require('../services/hashService');
+let Schema = mongoose.Schema;
 
-var userSchema = new Schema({
+let userSchema = new Schema({
 	firstname: {
 		type: String
 	},
@@ -29,11 +32,6 @@ var userSchema = new Schema({
 userSchema.methods.toJSON = SchemaMethods.toJSON;
 userSchema.methods.validatePassword = SchemaMethods.validatePassword;
 userSchema.methods.getSalt = SchemaMethods.getSalt;
-userSchema.methods.generateAuthToken = SchemaMethods.generateAuthToken;
+userSchema.methods.getToken = SchemaMethods.getToken;
 
-
-var schemas = {
-	userSchema: userSchema
-};
-
-module.exports = schemas;
+module.exports = userSchema;

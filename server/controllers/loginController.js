@@ -1,18 +1,19 @@
 'use strict';
 
-var LoginService = require('../services/loginService');
+let LoginService = require('../services/loginService');
 
-var LoginController = (function () {
+let LoginController = (() => {
 
 	function login(req, res, next) {
 		LoginService.verifyCredentials(req, res, next)
-			.then(function (user) {
-				return response.json({
-					token: user.generateAuthToken()
+			.then((token) => {
+				return res.json({
+					token: token
 				});
 			})
-			.catch(function (error) {
-				return response.status(401).json({
+			.catch((error) => {
+				console.log(error);
+				return res.status(401).json({
 					error: 'Unable to login user!'
 				});
 			});

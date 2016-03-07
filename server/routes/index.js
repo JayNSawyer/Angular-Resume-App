@@ -1,12 +1,13 @@
-var express = require('express');
-var router = express.Router();
-var mongoose = require('mongoose');
-var mongodb = mongoose.connect('mongodb://localhost/resumeApp');
-var ApplicationController = require('../controllers/applicationController');
-var UserController = require('../controllers/userController');
-var LoginController = require('../controllers/loginController');
-var ApiUserController = require('../controllers/api/userController');
+'use strict';
 
+let express = require('express');
+let router = express.Router();
+let mongoose = require('mongoose');
+let mongodb = mongoose.connect('mongodb://localhost/resumeApp');
+let ApplicationController = require('../controllers/applicationController');
+let UserController = require('../controllers/userController');
+let LoginController = require('../controllers/loginController');
+let ApiUserController = require('../controllers/api/userController');
 
 
 router.route('/')
@@ -15,6 +16,12 @@ router.route('/')
 router.route('/users')
 	.get(UserController.index)
 	.post(UserController.create); 
+
+/* TODO:
+router.route('/users/:id')
+	.get(UserController.show)
+	.put(UserController.edit);
+*/	
 
 router.route('/login')
 	.post(LoginController.login);
