@@ -26,18 +26,18 @@ describe('login service', function () {
     $httpBackend = _$httpBackend_;
 
   }));
-  /*
+  
     beforeEach(function () {
       $httpBackend.when('POST', '/login', mockUser)
         .respond(mockResponse);
     });
-  */
+  
   afterEach(function () {
     $httpBackend.verifyNoOutstandingExpectation();
     $httpBackend.verifyNoOutstandingRequest();
 
   });
-  /*
+  
     it('should login user', function () {
 
       loginService.login(mockUser).then(function (response) {
@@ -69,7 +69,8 @@ describe('login service', function () {
 
 
     });
-  */
+ 
+/*	
   it('should log user in', function () {
 
     $httpBackend.expectPOST('/login', mockUser).respond(200, mockResponse);
@@ -84,6 +85,6 @@ describe('login service', function () {
   it('should handle errors', function () {
     $httpBackend.expectPOST('/login', {}).respond(500, '');
   });
-
+*/
 
 });
