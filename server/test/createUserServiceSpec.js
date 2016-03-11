@@ -18,14 +18,14 @@ let req = {
 };
 
 describe('createUserService', () => {
-	it('should return a new user from the request body', (done) => {
+	it('returns a new user from the request body', (done) => {
 		createUser(req.body).then((user) => {
 			expect(user.firstname).to.equal('Joe');
 			done();
 		});
 	});
 	
-	it('should hash the user password', (done) => {
+	it('hashes the user password', (done) => {
 		createUser(req.body).then((user) => {
 			expect(user.password).to.equal(undefined);
 			expect(user.salt).to.be.ok;
@@ -34,7 +34,7 @@ describe('createUserService', () => {
 		});
 	});
 	
-	it('should call the setSalt method once', (done) => {
+	it('calls the setSalt method once', (done) => {
 		let setSalt = sinon.spy(HashService, 'setSalt');
 		createUser(req.body).then((user) => {
 			expect(setSalt.called).to.be.true;
@@ -42,7 +42,7 @@ describe('createUserService', () => {
 		});
 	});
 	
-	it('should call the createHash method once', (done) => {
+	it('calls the createHash method once', (done) => {
 		let createHash = sinon.spy(HashService, 'createHash');
 		createUser(req.body).then((user) => {
 			expect(createHash.called).to.be.true;
