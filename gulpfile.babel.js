@@ -62,7 +62,7 @@ gulp.task('unit-test', (done) => {
 	runUnitTests(true, done);
 });
 
-gulp.task('serve', ['lint', 'inject'], () => {
+gulp.task('serve', ['lint', 'unit-test', 'inject'], () => {
 
 	log('Analyzing files...');
 
