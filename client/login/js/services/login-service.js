@@ -1,4 +1,4 @@
-(function(){
+(function () {
 	'use strict';
 
 	angular
@@ -7,7 +7,7 @@
 
 	LoginService.$inject = ['$rootScope', '$http'];
 
-	function LoginService ($rootScope, $http) {
+	function LoginService($rootScope, $http) {
 
 		var self = this;
 
@@ -22,9 +22,14 @@
 		///////////PUBLIC METHODS////////////
 
 		function login(user) {
-			return $http.post('/login', user);
+			return $http.post('/login', user)
+				.then(function (response) {
+					resolve(response.data.token);
+				})
+				.catch(function (error) {
+					reject(error.data.message);
+				});
 		};
 
 	}
 })();
-

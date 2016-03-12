@@ -11,7 +11,6 @@
 		'$state', 
 		'$location', 
 		'$http', 
-		'LogoutService', 
 		'CurrentUserService',
 		'AlertService',
 		'AuthService'
@@ -23,7 +22,6 @@
 		$state,
 		$location,
 		$http,
-		LogoutService,
 		CurrentUserService,
 		AlertService,
 		AuthService) {
@@ -47,7 +45,7 @@
 			}
 
 			function logout() {
-				LogoutService.logout()
+				CurrentUserService.logout()
 					.then(function(data) {
 						return AlertService.emitAlert('user-logged-out');
 					})

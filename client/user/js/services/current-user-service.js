@@ -17,7 +17,8 @@
 
 		var CurrentUserService = {
 			init: init,
-			getCurrentUser: getCurrentUser
+			getCurrentUser: getCurrentUser,
+			logout: logout
 		};
 
 		return CurrentUserService;
@@ -59,6 +60,13 @@
 				deferred.reject('Unable to get current user');
 			}
 
+			return deferred.promise;
+		}
+		
+		//TODO: promisify AuthService to obviate the need for deferred below!
+		function logout() {
+			var deferred = $q.defer();
+			deferred.resolve(AuthService.removeToken());
 			return deferred.promise;
 		}
 

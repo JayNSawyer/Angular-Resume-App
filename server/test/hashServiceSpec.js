@@ -16,7 +16,7 @@ describe('HashService', () => {
 	it('generates a salt', (done) => {
 		HashService.setSalt().then((salt) => {
 			expect(salt).to.be.a('string');
-			expect(salt).to.have.length.of.at.least(10);
+			expect(salt).to.have.length.of.at.least(16);
 			done();
 		});
 	});
@@ -24,7 +24,7 @@ describe('HashService', () => {
 	it('creates a hash from a password and salt', (done) => {
 		HashService.createHash(password, salt).then((hash) => {
 			expect(hash).to.be.a('string');
-			expect(hash).to.have.length.of.at.least(10);
+			expect(hash).to.have.length.of.at.least(16);
 			expect(hash).to.not.equal(password);
 			done();
 		});

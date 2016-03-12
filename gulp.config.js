@@ -30,7 +30,6 @@ module.exports = function () {
 			'client/register/js/**/*.js',
 			'client/navigation/js/**/*.js',
 			'client/main/js/**/*.js',
-			'client/logout/js/**/*.js',
 			'client/login/js/**/*.js',
 			'client/auth/js/**/*.js',
 			'client/core/js/app.js',
