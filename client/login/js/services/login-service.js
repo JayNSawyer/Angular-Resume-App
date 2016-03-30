@@ -9,8 +9,6 @@
 
 	function LoginService($rootScope, $http) {
 
-		var self = this;
-
 		////////////PUBLIC API////////////
 
 		var LoginService = {
@@ -24,10 +22,10 @@
 		function login(user) {
 			return $http.post('/login', user)
 				.then(function (response) {
-					resolve(response.data.token);
+					return response.data.token;
 				})
 				.catch(function (error) {
-					reject(error.data.message);
+					return error.data.message;
 				});
 		};
 

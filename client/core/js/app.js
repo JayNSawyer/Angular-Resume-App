@@ -12,7 +12,6 @@
 			'resume.shared',
 			'resume.auth',
 			'resume.login',
-			'resume.logout',
 			'resume.main',
 			'resume.navigation',
 			'resume.register',

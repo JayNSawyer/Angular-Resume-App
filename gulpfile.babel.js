@@ -8,7 +8,6 @@ import gulpLoadPlugins from 'gulp-load-plugins';
 import wiredepLib from 'wiredep';
 import browserSync from 'browser-sync';
 
-//TODO for 3/8: need karma test coverage!!!!
 const args = yargs.argv;
 const config = gulpConfig();
 const wiredep = wiredepLib.stream;
@@ -51,7 +50,7 @@ gulp.task('inject', () => {
 		.pipe(wiredep(config.bowerOptions)) //wiredep only loads bower dependencies 
 		.pipe($.inject(injectCssSrc, config.ignorePaths))
 		.pipe($.inject(
-			gulp.src([config.srcFiles[0], config.srcFiles[1]])
+			gulp.src(config.js)
 			.pipe($.angularFilesort()), config.ignorePaths
 		))
 		.pipe(gulp.dest('./views'));
@@ -62,7 +61,7 @@ gulp.task('unit-test', (done) => {
 	runUnitTests(true, done);
 });
 
-gulp.task('serve', ['lint', 'unit-test', 'inject'], () => {
+gulp.task('serve', ['unit-test', 'lint', 'inject'], () => {
 
 	log('Analyzing files...');
 

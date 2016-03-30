@@ -13,7 +13,15 @@ module.exports = function () {
 			'./client/**/*.js',
 			'./*.js',
 			'*.js'
-			],
+		],
+		js: [
+			client + '**/**/*.module.js',
+			client + '**/**/**/*.js',
+			client + '**/**/*.js',
+			'!' + client + '**/**/**/*.spec.js',
+			'!' + client + '**/**/*.spec.js',
+			'!' + client + '**/*.spec.js'
+		],
 		karmaFiles: [
 			'vendor/jquery/dist/jquery.js',
 			'vendor/angular/angular.js',
