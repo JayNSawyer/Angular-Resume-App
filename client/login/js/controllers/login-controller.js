@@ -11,6 +11,7 @@
 
         var vm = this;
 
+		vm.jelani = 'random string';
         vm.user = {};
         vm.forgotPassword = false;
         vm.submit = submit;
@@ -19,7 +20,7 @@
 
 
         function submit() {
-            LoginService.login(vm.user)
+            return LoginService.login(vm.user)
                 .then(function (token) {
                     console.log(token);
                     AuthService.saveToken(token);
