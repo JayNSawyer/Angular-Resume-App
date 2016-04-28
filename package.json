@@ -51,6 +51,7 @@
     "karma-jasmine": "^0.3.6",
     "karma-phantomjs-launcher": "^0.2.3",
     "phantomjs": "^1.9.18",
+    "sinon": "^1.17.3",
     "winston": "^2.2.0",
     "wiredep": "^3.0.0",
     "yargs": "^3.26.0"

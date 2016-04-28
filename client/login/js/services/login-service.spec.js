@@ -1,8 +1,6 @@
 describe('login service', function () {
 	var loginService,
-		$httpBackend,
-		postResponse,
-		postError;
+		$httpBackend;
 
 	var mockUser = {
 		username: 'sampleUser',
@@ -40,13 +38,10 @@ describe('login service', function () {
 	it('should login user', function () {
 
 		loginService.login(mockUser).then(function (token) {
-			postResponse = token;
+			expect(token).toEqual('$2a$10$5eyaPZln8WikoFkLoeU0Ve');
 		});
 
 		$httpBackend.flush();
-
-		expect(postResponse).toEqual('$2a$10$5eyaPZln8WikoFkLoeU0Ve');
-
 	});
 
 	it('should handle errors', function () {
@@ -54,17 +49,9 @@ describe('login service', function () {
 		$httpBackend.expectPOST('/login', {})
 			.respond(500, '');
 
-		loginService.login({})
-			.then(function (token) {
-				postResponse = token;
-			})
-			.catch(function (errorMessage) {
-				postError = errorMessage;
-			});
-
+		loginService.login({}).catch(function (errorMessage) {});
 		$httpBackend.flush();
-
-
+		
 	});
 
 	/*	

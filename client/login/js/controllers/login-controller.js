@@ -10,9 +10,8 @@
     function LoginCtrl($scope, $rootScope, $state, AuthService, LoginService, AlertService, NotifierService) {
 
         var vm = this;
-
-		vm.jelani = 'random string';
         vm.user = {};
+		vm.gibberish = 'trash';
         vm.forgotPassword = false;
         vm.submit = submit;
         vm.forgotPasswordSubmit = forgotPasswordSubmit;
@@ -30,6 +29,8 @@
                     });
                     NotifierService.addNotifier('success', 'user logged in!');
                     $state.go('main');
+					return token;
+			//		$rootScope.$apply();
                 })
                 .catch(function (errorMessage) {
                     console.log('the failure: ');
@@ -37,6 +38,8 @@
                     //	AlertService.emitAlert('user-login-failure');
                     NotifierService.addNotifier('danger', errorMessage);
                     $state.go('login.signIn');
+				//	$rootScope.$apply();
+
                 })
         }
 

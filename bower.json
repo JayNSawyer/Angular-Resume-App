@@ -32,11 +32,14 @@
       ]
     },
     "font-awesome": {
-        "main": [
-            "less/font-awesome.less",
-            "css/font-awesome.min.css",
-            "scss/font-awesome.scss"
-        ]
-    }  
+      "main": [
+        "less/font-awesome.less",
+        "css/font-awesome.min.css",
+        "scss/font-awesome.scss"
+      ]
+    }
+  },
+  "devDependencies": {
+    "bardjs": "^0.1.8"
   }
 }

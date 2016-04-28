@@ -24,6 +24,7 @@ module.exports = function () {
 		],
 		karmaFiles: [
 			'vendor/jquery/dist/jquery.js',
+			'vendor/sinon/lib/sinon.js',
 			'vendor/angular/angular.js',
 			'vendor/angular-route/angular-route.js',
 			'vendor/angular-resource/angular-resource.js',
@@ -31,6 +32,7 @@ module.exports = function () {
 			'vendor/angular-animate/angular-animate.js',
 			'vendor/bootstrap/dist/js/bootstrap.js',
 			'vendor/angular-mocks/angular-mocks.js',
+			'vendor/bardjs/dist/bard.js',
 			'client/core/js/app.modules.js',
 			'client/writers/js/**/*.js',
 			'client/user/js/**/*.js',
